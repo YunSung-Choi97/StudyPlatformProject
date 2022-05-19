@@ -12,9 +12,9 @@ function List(props) {
                 <h3 className={styles.title}>{content.title}</h3>
                 <p className={styles.body}>{content.body}</p>
                 <div className={styles.classification}>
-                  <button>{content.recruitment}</button>
-                  <button>{content.field}</button>
-                  <button>{content.area}</button>
+                  <div>{content.recruitment}</div>
+                  <div>{content.field}</div>
+                  <div>{content.area}</div>
                 </div>
                 <div className={styles.info}>{content.author} · {content.date}</div>
               </div>

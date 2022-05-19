@@ -1,0 +1,11 @@
+.status {
+  display: flex;
+  margin: 0 auto;
+}
+
+.status button {
+  border: unset;
+  font-size: 1rem;
+  padding: 0 1rem;
+  cursor: pointer;
+}

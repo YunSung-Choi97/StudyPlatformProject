@@ -31,36 +31,11 @@
   overflow: hidden;
 }
 
-.classification button{
-  border: unset;
+.classification div{
+  display: inline-block;
   border-radius: 5px;
   background-color: #eff3fa;
   margin: 0 0.5rem 2rem 0;
   font-size: 0.8rem;
-  padding: 0.3rem 0.5rem;
-}
-
-.info {
-  font-size: 0.8rem;
-  color: #858a8d;
-}
-
-.prototype .prototype__body .prototype__title {
-  padding: 0.8rem;
-  padding-bottom: 0;
-  font-size: 1rem;
-  line-height: 1.4;
-  font-size: 1.2rem;
-  color: var(--secondary);
-}
-
-.prototype .prototype__body .prototype__field {
-  padding-top: 0.1rem;
-  width: 100%;
-  color: var(--primary-alpha);
-}
-
-.prototype .prototype__body .prototype__area {
-  font-size: 0.8rem;
-  padding-bottom: 0.8rem;
+  padding: 0.5rem 0.6rem;
 }

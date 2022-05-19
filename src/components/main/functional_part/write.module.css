@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+}
+.write {
+  width: 100px;
+  height: 40px;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0 12px;
+  border: 1px solid rgb(255, 102, 97);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(255, 102, 97);
+  color: rgb(255, 255, 255);
+}

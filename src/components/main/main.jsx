@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './main.module.css'
-import Search from './search/search';
-import Write from './write/write';
+import Status from './functional_part/status';
+import Search from './functional_part/search';
+import Write from './functional_part/write';
 import List from './list/list';
 
 function Main(props) {
@@ -41,9 +42,12 @@ function Main(props) {
   return (
     <main>
       <section className={styles.container}>
-        <section className={styles.header}>
+        <section className={styles.functional_part}>
+          <div className={styles.filter}>
+            <Status />
+            <Search />
+          </div>
           <Write />
-          <Search />
         </section>
         <section className={styles.list}>
           <List contents={contents} />
