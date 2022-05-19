@@ -1,0 +1,145 @@
+header {
+  background-color: white;
+  font-size: 1rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  max-width: 1200px;
+  padding: 0 2vw;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.account {
+  display: flex;
+}
+
+.signin {
+  color: rgb(71, 71, 71);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgb(255, 102, 97);
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  /* transition: color 0.3s ease 0s, border-color 0.3s ease 0s,
+    background-color 0.3s ease 0s; */
+}
+
+.signup {
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  margin-left: 0.5rem;
+  border: 1px solid rgb(255, 102, 97);
+  border-radius: 4px;
+  background-color: rgb(255, 102, 97);
+  cursor: pointer;
+  /* transition: color 0.3s ease 0s, border-color 0.3s ease 0s,
+    background-color 0.3s ease 0s; */
+}
+
+.navbar {
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  max-width: 1200px;
+  padding: 0;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.field {
+  padding: 1rem 1.5rem;
+  color: rgb(71, 71, 71);
+  font-weight: 500;
+}
+
+/* header {
+  padding: 1vw;
+  text-align: center;
+  background-color: white;
+}
+
+header .btn__area {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+header a {
+  display: inline-block;
+  margin-right: 40px;
+}
+
+header button {
+  display: inline-block;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.3s ease 0s, border-color 0.3s ease 0s,
+    background-color 0.3s ease 0s;
+  text-decoration: none;
+  border: 1px solid rgb(255, 102, 97);
+  background-color: rgb(255, 102, 97);
+  font-size: 0.8rem;
+  line-height: 22px;
+  padding: 9px 15px;
+  color: rgb(255, 255, 255) !important;
+  line-height: 18px;
+}
+
+.header__container {
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  position: relative;
+}
+
+header .sub-menu {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
+header .title {
+  font-size: 3rem;
+  line-height: 4rem;
+  font-weight: bold;
+}
+
+header .main-menu .item li {
+  margin-top: 20px;
+  padding: 15px 20px 16px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 28px;
+  color: rgb(71, 71, 71);
+  font-weight: 500;
+  vertical-align: baseline;
+}
+
+.item {
+  align-content: space-between;
+  align-items: center;
+  display: flex;
+  display: -ms-flexbox;
+  -ms-flex-align: center;
+  -ms-flex-line-pack: justify;
+} */

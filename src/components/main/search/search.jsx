@@ -10,7 +10,7 @@ function Search(props) {
           <img className={styles.icon} src={icon} />
           <input type="text" placeholder="관심 스터디를 검색해보세요!" />
         </div>
-        <a href="./">
+        <a href="/">
           <button className={styles.button}>검색</button>
         </a>
       </div>

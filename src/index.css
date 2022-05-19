@@ -1,111 +1,5 @@
-/* reset */
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-/* HTML5 display-role reset for older browsers */
-article,
-details,
-figcaption,
-figure,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+@import 'reset.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 html {
   box-sizing: border-box;
@@ -133,6 +27,7 @@ button:focus {
   --red-color: #ff4d4f;
 }
 
+/* 드래그 하는 부분의 색상 */
 ::selection {
   background: var(--secondary);
 }
@@ -143,13 +38,12 @@ button:focus {
 
 body,
 button {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
+  font-family: 'Noto Sans KR', sans-serif;
   background: var(--gray);
   color: var(--primary);
 }
 
-.container {
+/* .container {
   margin-left: auto;
   margin-right: auto;
   padding-left: 0.4rem;
@@ -158,7 +52,7 @@ button {
   flex-direction: column;
   min-height: 100vh;
   max-width: 1000px;
-}
+} */
 
 a {
   background-color: transparent;
@@ -171,7 +65,7 @@ a {
   text-decoration: none;
 }
 
-header {
+/* header {
   padding: 1vw;
   text-align: center;
   background-color: white;
@@ -238,15 +132,15 @@ header .main-menu .item li {
   color: rgb(71, 71, 71);
   font-weight: 500;
   vertical-align: baseline;
-}
+} */
 
-.logo {
+/* .logo {
   width: 25vw;
   min-width: 160px;
   max-width: 380px;
-}
+} */
 
-main {
+/* main {
   padding: 0.4rem;
 }
 
@@ -295,8 +189,6 @@ main {
   padding-bottom: 0.8rem;
 }
 
-/* item */
-
 .item {
   align-content: space-between;
   align-items: center;
@@ -304,4 +196,4 @@ main {
   display: -ms-flexbox;
   -ms-flex-align: center;
   -ms-flex-line-pack: justify;
-}
+} */
