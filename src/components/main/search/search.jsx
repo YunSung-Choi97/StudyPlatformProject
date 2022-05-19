@@ -14,7 +14,6 @@ function Search(props) {
           <button className={styles.button}>검색</button>
         </a>
       </div>
-      
     </form>
   );
 }

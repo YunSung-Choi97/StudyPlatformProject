@@ -16,7 +16,7 @@ function Write(props) {
         </li>
       </ul>
       <a href="./">
-      <button className={styles.write}>글쓰기</button>
+        <button className={styles.write}>글쓰기</button>
       </a>
     </div>
   );
