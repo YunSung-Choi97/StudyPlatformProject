@@ -6,13 +6,13 @@ function Status(props) {
     <div>
       <ul className={styles.status}>
         <li className={styles.whole}>
-          <button>전체</button>
+          <button onClick={() => { props.onChangeMode('전체'); }}>전체</button>
         </li>
         <li className={styles.recruiting}>
-          <button>모집중</button>
+          <button onClick={() => { props.onChangeMode('모집중'); }}>모집중</button>
         </li>
         <li className={styles.recruitied}>
-          <button>모집완료</button>
+          <button onClick={() => { props.onChangeMode('모집완료'); }}>모집완료</button>
         </li>
       </ul>
     </div>

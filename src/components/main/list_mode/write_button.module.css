@@ -1,6 +1,7 @@
 .container {
   display: flex;
 }
+
 .write {
   width: 100px;
   height: 40px;

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './header.module.css';
 
 function Header(props) {
-  const fields = ["전체", "어학", "취업", "고시/공무원", "취미/교양", "프로그래밍", "기타"]
+  const fields = ['전체', '어학', '취업', '고시/공무원', '취미/교양', '프로그래밍', '자율', '기타'];
 
   return (
     <header>
@@ -16,7 +16,12 @@ function Header(props) {
         </div>
       </div>
       <ul className={styles.navbar}>
-        {fields.map(field => { return <li className={styles.field}>{field}</li> })}
+        {fields.map((field, idx) => {
+          return (
+            <a href='/' onClick={(event) => { event.preventDefault(); props.onChangeField(field); }}>
+              <li key={idx} className={styles.field}>{field}</li>
+            </a>)
+        })}
       </ul>
     </header>
   );
