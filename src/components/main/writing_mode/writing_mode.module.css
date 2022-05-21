@@ -6,7 +6,7 @@
 }
 
 .container .input {
-  background: #fff;
+  background: white;
   border-radius: 3px;
   margin: 0.3rem 0;
   padding: 1.5rem;
@@ -37,10 +37,10 @@
   font-weight: 500;
   font-size: 1rem;
   padding: 0 12px;
-  border: 1px solid #dee2e6;
+  border: 2px solid var(--gray-border);
   border-radius: 4px;
   cursor: pointer;
-  color: rgb(71, 71, 71);
+  color: var(--gray-font);
 }
 
 .button2 {
@@ -50,9 +50,9 @@
   font-size: 1rem;
   padding: 0 12px;
   margin-left: 1rem;
-  border: 1px solid rgb(255, 102, 97);
+  border: 1px solid var(--secondary);
   border-radius: 4px;
   cursor: pointer;
-  background-color: rgb(255, 102, 97);
-  color: rgb(255, 255, 255);
+  background-color: var(--secondary);
+  color: white;
 }

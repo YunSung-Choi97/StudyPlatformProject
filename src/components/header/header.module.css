@@ -22,25 +22,25 @@ header {
 }
 
 .signin {
-  color: rgb(71, 71, 71);
+  color: var(--primary);
   font-size: 1rem;
   font-weight: 500;
   padding: 0.3rem 0.5rem;
-  border: 1px solid rgb(255, 102, 97);
+  border: 1px solid var(--secondary);
   border-radius: 4px;
   background-color: rgb(255, 255, 255);
   cursor: pointer;
 }
 
 .signup {
-  color: rgb(255, 255, 255);
+  color: white;
   font-size: 1rem;
   font-weight: 500;
   padding: 0.3rem 0.5rem;
   margin-left: 0.5rem;
-  border: 1px solid rgb(255, 102, 97);
+  border: 1px solid var(--secondary);
   border-radius: 4px;
-  background-color: rgb(255, 102, 97);
+  background-color: var(--secondary);
   cursor: pointer;
 }
 
@@ -58,6 +58,6 @@ header {
 
 .field {
   padding: 1rem 1.5rem;
-  color: rgb(71, 71, 71);
+  color: var(--primary);
   font-weight: 500;
 }

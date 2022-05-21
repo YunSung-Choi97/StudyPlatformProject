@@ -6,7 +6,7 @@
 }
 
 .container {
-  background: #fff;
+  background: white;
   border-radius: 3px;
   margin: 0.3rem 0;
   padding: 0;
@@ -34,7 +34,7 @@
 .classification div{
   display: inline-block;
   border-radius: 5px;
-  background-color: #eff3fa;
+  background-color: var(--blue);
   margin: 0 0.5rem 2rem 0;
   font-size: 0.8rem;
   padding: 0.5rem 0.6rem;

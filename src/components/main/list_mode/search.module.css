@@ -10,7 +10,7 @@
   width: 300px;
   height: 40px;
   padding: 0.5rem 0.8rem;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--gray-border);
   border-radius: 3px;
 }
 
@@ -36,9 +36,9 @@
   font-weight: 500;
   font-size: 1rem;
   margin-left: 16px;
-  border: 1px solid rgb(255, 102, 97);
+  border: 1px solid var(--secondary);
   border-radius: 4px;
   cursor: pointer;
   background-color: var(--gray);
-  color: rgb(255, 102, 97);
+  color: var(--secondary);
 }
