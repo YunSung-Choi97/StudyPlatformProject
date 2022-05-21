@@ -8,7 +8,10 @@ function Header(props) {
     <header>
       <div className={styles.container}>
         <div className={styles.title}>
-          <a href='/'>Study Finding</a>
+          <a href='/' onClick={(event) => {
+            event.preventDefault();
+            props.onChangeField('전체', 'list', '전체');
+          }}>Study Finding</a>
         </div>
         <div className={styles.account}>
           <button className={styles.signin}>로그인</button>
@@ -18,7 +21,10 @@ function Header(props) {
       <ul className={styles.navbar}>
         {fields.map((field, idx) => {
           return (
-            <a href='/' onClick={(event) => { event.preventDefault(); props.onChangeField(field); }}>
+            <a key={idx} href='/' onClick={(event) => {
+              event.preventDefault();
+              props.onChangeField(field, 'list', props.status);
+            }}>
               <li key={idx} className={styles.field}>{field}</li>
             </a>)
         })}
