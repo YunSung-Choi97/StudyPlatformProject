@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <Header status={status} onChangeField={(field, mode, status) => { setField(field); setMode(mode); setStatus(status) }} />
+      <Header field={field} status={status} onChangeField={(field, mode, status) => { setField(field); setMode(mode); setStatus(status) }} />
       <Main field={field} mode={mode} status={status} onChangeMode={(mode) => { setMode(mode); }} onChangeStatus={(recruit) => { setStatus(recruit) }} />
     </>
   );

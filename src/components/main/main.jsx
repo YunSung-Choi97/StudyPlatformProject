@@ -48,7 +48,7 @@ function Main(props) {
       <>
         <section className={styles.functional_part}>
           <div className={styles.filter}>
-            <Status onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />
+            <Status status={props.status} onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />
             <Search />
           </div>
           <Writing onChangeMode={(mode) => { props.onChangeMode(mode); }} />

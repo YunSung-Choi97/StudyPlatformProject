@@ -2,20 +2,28 @@ import React from 'react';
 import styles from './status.module.css';
 
 function Status(props) {
+  const statuses = ['전체', '모집중', '모집완료'];
+
   return (
-    <div>
-      <ul className={styles.status}>
-        <li className={styles.whole}>
-          <button onClick={() => { props.onChangeStatus('전체'); }}>전체</button>
-        </li>
-        <li className={styles.recruiting}>
-          <button onClick={() => { props.onChangeStatus('모집중'); }}>모집중</button>
-        </li>
-        <li className={styles.recruitied}>
-          <button onClick={() => { props.onChangeStatus('모집완료'); }}>모집완료</button>
-        </li>
-      </ul>
-    </div>
+    <ul className={styles.status}>
+      {statuses.map((status, idx) => {
+        return (
+          <>
+            {
+              props.status === status
+                ?
+                <li key={idx}>
+                  <button key={idx} className={styles.active} onClick={() => { props.onChangeStatus(status); }}>{status}</button>
+                </li>
+                :
+                <li key={idx}>
+                  <button key={idx} onClick={() => { props.onChangeStatus(status); }}>{status}</button>
+                </li>
+            }
+          </>
+        )
+      })}
+    </ul>
   );
 }
 

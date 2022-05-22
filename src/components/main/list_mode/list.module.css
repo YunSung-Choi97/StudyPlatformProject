@@ -12,6 +12,10 @@
   padding: 0;
 }
 
+.container :hover {
+  background-color: rgb(255, 248, 248);
+}
+
 .item {
   display: flex;
   flex-direction: column;

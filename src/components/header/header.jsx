@@ -25,7 +25,11 @@ function Header(props) {
               event.preventDefault();
               props.onChangeField(field, 'list', props.status);
             }}>
-              <li key={idx} className={styles.field}>{field}</li>
+              {
+                props.field !== field
+                ? <li key={idx} className={styles.field}>{field}</li>
+                : <li key={idx} className={[styles.field, styles.active].join(' ')}>{field}</li>
+              }
             </a>)
         })}
       </ul>

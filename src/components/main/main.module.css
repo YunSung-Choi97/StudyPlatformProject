@@ -10,8 +10,7 @@
 .functional_part {
   display: flex;
   justify-content: space-between;
-  padding: 0 0.5rem;
-  margin: 1.3rem 0 0.2rem 0;
+  padding: 1.2rem 0.5rem;
 }
 
 .filter {
@@ -20,5 +19,5 @@
 }
 
 .list {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 }
