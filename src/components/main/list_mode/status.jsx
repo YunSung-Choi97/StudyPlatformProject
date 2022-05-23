@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styles from './status.module.css';
 
 function Status(props) {
@@ -8,19 +8,19 @@ function Status(props) {
     <ul className={styles.status}>
       {statuses.map((status, idx) => {
         return (
-          <>
+          <Fragment key={idx}>
             {
               props.status === status
                 ?
-                <li key={idx}>
-                  <button key={idx} className={styles.active} onClick={() => { props.onChangeStatus(status); }}>{status}</button>
+                <li>
+                  <button className={styles.active} onClick={() => { props.onChangeStatus(status); }}>{status}</button>
                 </li>
                 :
-                <li key={idx}>
-                  <button key={idx} onClick={() => { props.onChangeStatus(status); }}>{status}</button>
+                <li>
+                  <button onClick={() => { props.onChangeStatus(status); }}>{status}</button>
                 </li>
             }
-          </>
+          </Fragment>
         )
       })}
     </ul>

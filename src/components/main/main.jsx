@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './main.module.css'
 import Status from './list_mode/status';
 import Search from './list_mode/search';
@@ -8,7 +8,7 @@ import WritingMode from './writing_mode/writing_mode';
 
 function Main(props) {
   const [contentId, setContentId] = useState(4);
-  const [userId, setUserId] = useState('최윤성')
+  const [userId, setUserId] = useState('최윤성');
   const [contents, setContents] = useState([
     {
       id: 1,
@@ -40,8 +40,19 @@ function Main(props) {
       author: "이제우",
       date: "22-05-16 11:30"
     },
-  ])
+  ]);
 
+  // const [contents, setContents] = useState([]);
+  // useEffect(() => {
+  //   fetch('contents.json')
+  //   .then((result) => {
+  //     return result.json();
+  //   })
+  //   .then((json) => {
+  //     setContents(json);
+  //   })
+  // });
+  
   let body;
   if (props.mode === 'list') {
     body =

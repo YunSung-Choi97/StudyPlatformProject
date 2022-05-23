@@ -27,8 +27,8 @@ function Header(props) {
             }}>
               {
                 props.field !== field
-                ? <li key={idx} className={styles.field}>{field}</li>
-                : <li key={idx} className={[styles.field, styles.active].join(' ')}>{field}</li>
+                ? <li className={styles.field}>{field}</li>
+                : <li className={[styles.field, styles.active].join(' ')}>{field}</li>
               }
             </a>)
         })}
