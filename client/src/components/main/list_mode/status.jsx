@@ -13,11 +13,15 @@ function Status(props) {
               props.status === status
                 ?
                 <li>
-                  <button className={styles.active} onClick={() => { props.onChangeStatus(status); }}>{status}</button>
+                  <button className={styles.active} onClick={() => {
+                    props.onChangeStatus(status);
+                  }}>{status}</button>
                 </li>
                 :
                 <li>
-                  <button onClick={() => { props.onChangeStatus(status); }}>{status}</button>
+                  <button onClick={() => {
+                    props.onChangeStatus(status);
+                  }}>{status}</button>
                 </li>
             }
           </Fragment>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
 import Header from "./components/header/header";
 import Main from "./components/main/main";
 
@@ -11,13 +11,11 @@ function App() {
   return (
     <Router>
       <Header field={field} status={status} onChangeState={(field, mode, status) => { setField(field); setMode(mode); setStatus(status) }} />
-      <Routes>
-        <Route path='/*' element={
-          <Main field={field} mode={mode} status={status} onChangeState={(field, mode, status) => { setField(field); setMode(mode); setStatus(status) }} onChangeStatus={(recruit) => { setStatus(recruit) }} />
-        }></Route>
-      </Routes>
+      <Main 
+      field={field} mode={mode} status={status} 
+      onChangeState={(field, mode, status) => { setField(field); setMode(mode); setStatus(status) }} 
+      onChangeStatus={(recruit) => { setStatus(recruit) }} />
     </Router>
-
   );
 }
 

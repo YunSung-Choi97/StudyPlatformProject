@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import styles from './main.module.css'
-import Status from './list_mode/status';
-import Search from './list_mode/search';
-import Writing from './list_mode/writing';
-import List from './list_mode/list';
+import ListMode from './list_mode/list_mode';
 import WritingMode from './writing_mode/writing_mode';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
 function Main(props) {
   const [contentId, setContentId] = useState(4);
@@ -54,63 +51,39 @@ function Main(props) {
   //   })
   // });
 
-  // let body;
-  // if (props.mode === 'list') {
-  //   body =
-  //     <>
-  //       <section className={styles.functional_part}>
-  //         <div className={styles.filter}>
-  //           <Status status={props.status} onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />
-  //           <Search />
-  //         </div>
-  //         <Writing onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }} />
-  //       </section>
-  //       <section className={styles.list}>
-  //         <List field={props.field} status={props.status} contents={contents} />
-  //       </section>
-  //     </>
-  // } else if (props.mode === 'writing') {
-  //   body = <WritingMode
-  //     onChangeContents={(title, body, field, area) => {
-  //       const newContent = { id: contentId, title: title, body: body, recruitment: '모집중', field: field, area: area, author: userId, date: new Date().toLocaleString() };
-  //       const newContents = [...contents];
-  //       newContents.push(newContent);
-  //       setContents(newContents);
-  //       setContentId(contentId + 1);
-  //       props.onChangeState('전체', 'list', '전체')
-  //     }} />
-  // }
-
   return (
     <main>
       <section className={styles.container}>
-        {/* {body} */}
         <Routes>
-          <Route path='/*' element={
-            <>
-            <section className={styles.functional_part}>
-              <div className={styles.filter}>
-                <Status status={props.status} onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />
-                <Search />
-              </div>
-              <Writing onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }} />
-            </section>
-            <section className={styles.list}>
-              <List field={props.field} status={props.status} contents={contents} />
-            </section>
-          </>
-          }></Route>
-          <Route path='write' element={
+          <Route path='/' element={
+          <ListMode
+            field={props.field} status={props.status} contents={contents}
+            onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }}
+            onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />} />
+          <Route path='/category/:category' element={
+          <ListMode
+            field={props.field} status={props.status} contents={contents}
+            onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }}
+            onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />} />
+          <Route path='/status/:status' element={
+          <ListMode
+            field={props.field} status={props.status} contents={contents}
+            onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }}
+            onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />} />
+          <Route path='/category/:category/status/:status' element={
+          <ListMode
+            field={props.field} status={props.status} contents={contents}
+            onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }}
+            onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />} />
+          <Route path='/write' element={
             <WritingMode
-            onChangeContents={(title, body, field, area) => {
-              const newContent = { id: contentId, title: title, body: body, recruitment: '모집중', field: field, area: area, author: userId, date: new Date().toLocaleString() };
-              const newContents = [...contents];
-              newContents.push(newContent);
-              setContents(newContents);
-              setContentId(contentId + 1);
-              props.onChangeState('전체', 'list', '전체')
-            }} />
-          }></Route>
+              onChangeContents={(title, body, field, area) => {
+                const newContent = { id: contentId, title: title, body: body, recruitment: '모집중', field: field, area: area, author: userId, date: new Date().toLocaleString() };
+                const newContents = [...contents];
+                newContents.push(newContent);
+                setContents(newContents); }}
+              onChangeContentId={() => { setContentId(contentId + 1); }}
+              onChangeState={(field, mode, status) => { props.onChangeState(field, mode, status) }} />} />
         </Routes>
       </section>
     </main>

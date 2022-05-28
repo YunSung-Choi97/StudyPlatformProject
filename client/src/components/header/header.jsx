@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
-import { Link, useLocation, useSearchParams, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styles from './header.module.css';
 
 function Header(props) {
   const fields = ['전체', '어학', '취업', '고시/공무원', '취미/교양', '프로그래밍', '자율', '기타'];
   const location = useLocation();
+  const {params} = useParams();
 
   return (
     <header>
@@ -23,7 +24,7 @@ function Header(props) {
         {fields.map((field, idx) => {
           return (
             <Fragment key={idx}>
-              <Link to={'/?category=' + idx} onClick={() => {
+              <Link to={`/category/${idx}`} onClick={() => {
                 props.onChangeState(field, 'list', props.status);
               }}>
                 {
