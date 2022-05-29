@@ -21,7 +21,7 @@ function ListMode(props) {
     <>
       <section className={styles.functional_part}>
         <div className={styles.filter}>
-          <Status field={props.field} status={props.status} onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />
+          <Status status={props.status} onChangeStatus={(recruit) => { props.onChangeStatus(recruit) }} />
           <Search />
         </div>
         <Writing />

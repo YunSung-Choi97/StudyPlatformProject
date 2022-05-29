@@ -1,21 +1,15 @@
 import React, { useEffect } from 'react';
 import styles from './writing_mode.module.css';
-import { useNavigate } from 'react-router-dom'
 
 function WritingMode(props) {
   const fields = ['어학', '취업', '고시/공무원', '취미/교양', '프로그래밍', '자율', '기타'];
   const areas = ['서울', '수원', '인천', '대구', '부산', '울산', '광주', '전주', '대전', '세종', '천안', '청주', '원주', '춘천', '제주', '기타']
-  const navigate = useNavigate();
   useEffect(() => {
     props.onChangeState(null, 'writing', '전체');
   })
-
+  
   return (
-    <form className={styles.container} action='http://localhost:5000' method='post' onSubmit={(event) => {
-      props.onChangeContents(event.target.title.value, event.target.body.value, event.target.field.value, event.target.area.value);
-      props.onChangeContentId();
-      navigate('/');
-    }}>
+    <form className={styles.container} action='/write' method='post'>
       <div className={styles.input}>
         <input type='text' placeholder='제목을 입력해주세요.' name='title' />
       </div>
@@ -34,7 +28,7 @@ function WritingMode(props) {
       </div>
       <div className={styles.button}>
         <button className={styles.button1}>취소</button>
-        <button className={styles.button2}>저장</button>
+        <button className={styles.button2} type='submit'>저장</button>
       </div>
     </form>
   );
