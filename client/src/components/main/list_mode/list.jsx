@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './list.module.css';
 
 function List(props) {
@@ -12,21 +13,23 @@ function List(props) {
     <ul className={styles.items}>
       {props.contents.map(content => {
         if ((fieldCondition || (props.field === content.field)) && (statusCondition || (props.status === content.recruitment))) {
-          return (
-            <li className={styles.container} key={content.id}>
-              <a href="/">
-                <div className={styles.item}>
-                  <h3 className={styles.title}>{content.title}</h3>
-                  <p className={styles.body}>{content.body}</p>
-                  <div className={styles.classification}>
-                    <div>{content.recruitment}</div>
-                    <div>{content.field}</div>
-                    <div>{content.area}</div>
+          if (content.title.includes(props.search)) {
+            return (
+              <li className={styles.container} key={content.id}>
+                <Link to={`/content/${content.id}`}>
+                  <div className={styles.item}>
+                    <h3 className={styles.title}>{content.title}</h3>
+                    <p className={styles.body}>{content.body}</p>
+                    <div className={styles.classification}>
+                      <div>{content.recruitment}</div>
+                      <div>{content.field}</div>
+                      <div>{content.area}</div>
+                    </div>
+                    <div className={styles.info}>{content.author} · {content.date}</div>
                   </div>
-                  <div className={styles.info}>{content.author} · {content.date}</div>
-                </div>
-              </a>
-            </li>);
+                </Link>
+              </li>);
+          }
         }
       })}
     </ul>
