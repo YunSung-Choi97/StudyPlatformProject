@@ -61,14 +61,6 @@ app.post('/write', (req, res) => {
     }
     contentId += 1;
     
-    // <<<<<<<<<<<<<<<<< debug >>>>>>>>>>>>>>>>>>>>>>
-    console.log('---------------------------------');
-    console.log(newContent);
-    console.log('---------------------------------');
-    contents.push(newContent);
-    console.log(contents);
-    console.log('---------------------------------');
-    
     return res.redirect('/');
   })
 })
