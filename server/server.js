@@ -60,7 +60,7 @@ app.post('/write', (req, res) => {
       date: `${new Date().toLocaleString()}`
     }
     contentId += 1;
-    
+    contents.push(newContent);
     return res.redirect('/');
   })
 })
