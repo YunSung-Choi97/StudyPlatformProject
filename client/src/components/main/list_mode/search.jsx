@@ -17,7 +17,7 @@ function Search(props) {
         dispatch(setSearch(event.target.search.value));
       }}>
         <div className={styles.search_item}>
-          <img className={styles.icon} src={icon} />
+          <img className={styles.icon} src={icon} alt='search' />
           <input
             type="text" name='search' value={searchData} placeholder="관심 스터디를 검색해보세요!" onChange={(event) => { setSearchData(event.target.value); }} />
         </div>

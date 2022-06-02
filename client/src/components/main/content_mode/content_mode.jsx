@@ -13,7 +13,7 @@ function ContentMode(props) {
       .then((req) => { return req.json(); })
       .then((json) => { setContent(json); });
     dispatch(setField(null));
-  }, [])
+  }, [dispatch, params.contentId])
 
   return (
     <div className={styles.container}>

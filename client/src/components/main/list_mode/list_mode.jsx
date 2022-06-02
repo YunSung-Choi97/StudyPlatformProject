@@ -26,7 +26,7 @@ function ListMode(props) {
       dispatch(setStatus('전체'))
     }
     dispatch(setSearch(''));
-  }, []);
+  }, [dispatch, params.categoryId]);
 
   return (
     <>

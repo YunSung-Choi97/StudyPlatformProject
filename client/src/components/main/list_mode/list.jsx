@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from './list.module.css';
@@ -36,7 +36,7 @@ function List(props) {
                 </Link>
               </li>);
           }
-        }
+        } return <Fragment key={content.id}/>
       })}
     </ul>
   );

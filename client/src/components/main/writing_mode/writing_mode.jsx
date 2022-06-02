@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setField } from '../../../redux/reducer/field';
 import styles from './writing_mode.module.css';
 
@@ -10,7 +11,8 @@ function WritingMode(props) {
   useEffect(() => {
     dispatch(setField(null));
   })
-  
+  const navigate = useNavigate();
+
   return (
     <form className={styles.container} action='/write' method='post'>
       <div className={styles.input}>
@@ -30,7 +32,7 @@ function WritingMode(props) {
         <textarea placeholder='내용을 입력해주세요.' name='body' rows='15' />
       </div>
       <div className={styles.button}>
-        <button className={styles.button1}>취소</button>
+        <button className={styles.button1} type='button' onClick={() => { navigate(-1); }}>취소</button>
         <button className={styles.button2} type='submit'>저장</button>
       </div>
     </form>
