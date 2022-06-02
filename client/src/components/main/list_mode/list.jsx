@@ -1,19 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styles from './list.module.css';
 
 function List(props) {
+  const _field = useSelector(state => state.field.value);
+  const _status = useSelector(state => state.status.value);
+  const _contents = useSelector(state => state.contents.value);
+  const _search = useSelector(state => state.search.value);
+
   let fieldCondition;
-  if (props.field === '전체') { fieldCondition = true } else { fieldCondition = false }
+  if (_field === '전체') { fieldCondition = true } else { fieldCondition = false }
 
   let statusCondition;
-  if (props.status === '전체') { statusCondition = true } else { statusCondition = false }
+  if (_status === '전체') { statusCondition = true } else { statusCondition = false }
 
   return (
     <ul className={styles.items}>
-      {props.contents.map(content => {
-        if ((fieldCondition || (props.field === content.field)) && (statusCondition || (props.status === content.recruitment))) {
-          if (content.title.includes(props.search)) {
+      {_contents.map(content => {
+        if ((fieldCondition || (_field === content.field)) && (statusCondition || (_status === content.recruitment))) {
+          if (content.title.includes(_search)) {
             return (
               <li className={styles.container} key={content.id}>
                 <Link to={`/content/${content.id}`}>

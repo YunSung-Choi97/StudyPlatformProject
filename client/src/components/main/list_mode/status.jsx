@@ -1,8 +1,12 @@
 import React, { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStatus } from '../../../redux/reducer/status';
 import styles from './status.module.css';
 
 function Status(props) {
   const statuses = ['전체', '모집중', '모집완료'];
+  const _status = useSelector((state) => state.status.value);
+  const dispatch = useDispatch();
 
   return (
     <ul className={styles.status}>
@@ -10,18 +14,14 @@ function Status(props) {
         return (
           <Fragment key={idx}>
             {
-              props.status === status
+              _status === status
                 ?
                 <li>
-                  <button className={styles.active} onClick={() => {
-                    props.onChangeStatus(status);
-                  }}>{status}</button>
+                  <button className={styles.active} onClick={() => { dispatch(setStatus(status)); }}>{status}</button>
                 </li>
                 :
                 <li>
-                  <button onClick={() => {
-                    props.onChangeStatus(status);
-                  }}>{status}</button>
+                  <button onClick={() => { dispatch(setStatus(status)); }}>{status}</button>
                 </li>
             }
           </Fragment>

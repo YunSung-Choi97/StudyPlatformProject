@@ -5,7 +5,7 @@ import styles from './writing.module.css';
 function Writing(props) {
   return (
     <div className={styles.container}>
-      <Link to={'/' + 'write'}>
+      <Link to={'/write'}>
         <button className={styles.write} >글쓰기</button>
       </Link>
     </div>

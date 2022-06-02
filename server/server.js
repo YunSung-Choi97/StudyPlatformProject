@@ -38,8 +38,12 @@ const contents = [
   }
 ]
 
-app.get('/api/contents', (req, res) => {
+app.get('/contents', (req, res) => {
   res.json(contents)
+})
+
+app.get('/contents/:contentsId', (req, res) => {
+  res.json(contents[Number(req.params.contentsId)-1]);
 })
 
 app.post('/write', (req, res) => {

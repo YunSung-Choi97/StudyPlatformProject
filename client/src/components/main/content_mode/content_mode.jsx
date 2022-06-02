@@ -1,20 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './content_mode.module.css';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setField } from '../../../redux/reducer/field';
 
 function ContentMode(props) {
   const params = useParams();
-  const content = props.contents[Number(params.contentId) - 1];
+  const dispatch = useDispatch();
+  const [content, setContent] = useState({})
   useEffect(() => {
-    if (params.contentId !== undefined) {
-      props.onChangeState(null, 'content', '전체');
-    }
-  })
-  
+    fetch(`/contents/${params.contentId}`)
+      .then((req) => { return req.json(); })
+      .then((json) => { setContent(json); });
+    dispatch(setField(null));
+  }, [])
+
   return (
     <div className={styles.container}>
       {
-        content ?
+        content
+          ?
           <>
             <div className={styles.header}>
               <h1 className={styles.title}>{content.title}</h1>
@@ -25,7 +30,8 @@ function ContentMode(props) {
             </div>
             <p className={styles.body}>{content.body}</p>
           </>
-          : <></>
+          :
+          <></>
       }
     </div>
   );

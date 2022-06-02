@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import styles from './search.module.css';
 import icon from '../../../assets/images/search.png'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSearch } from '../../../redux/reducer/search';
 
 function Search(props) {
-  const navigate = useNavigate();
   const [searchData, setSearchData] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <>
       <form className={styles.container} onSubmit={(event) => {
         event.preventDefault();
-        navigate(`?search=${event.target.search.value}`)
-        props.onChangeSearch(event.target.search.value)
+        navigate(`?search=${event.target.search.value}`);
+        dispatch(setSearch(event.target.search.value));
       }}>
         <div className={styles.search_item}>
           <img className={styles.icon} src={icon} />
@@ -22,8 +25,8 @@ function Search(props) {
       </form>
       <button className={styles.reset} onClick={() => {
         navigate('');
-        props.onChangeSearch('');
         setSearchData('');
+        dispatch(setSearch(''));
       }}>Reset</button>
     </>
   );
