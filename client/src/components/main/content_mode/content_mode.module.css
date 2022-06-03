@@ -26,4 +26,26 @@
 
 .body {
   margin: 1.5rem 1.5rem;
+  line-height: 2rem;
+  white-space: pre-wrap;
+}
+
+.button {
+  display: flex;
+  justify-content: right;
+  margin: 1rem 0;
+}
+
+.back {
+  width: 150px;
+  height: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0 12px;
+  margin-left: 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: white;
 }

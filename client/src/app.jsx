@@ -13,7 +13,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Main />}>
           <Route path='/' element={<ListMode />} />
-          <Route path='/category/:categoryId' element={<ListMode />} />
           <Route path='/write' element={<WritingMode />} />
           <Route path='/content/:contentId' element={<ContentMode />} />
         </Route>

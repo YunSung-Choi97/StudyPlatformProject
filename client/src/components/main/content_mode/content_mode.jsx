@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import styles from './content_mode.module.css';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setField } from '../../../redux/reducer/field';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function ContentMode(props) {
   const params = useParams();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [content, setContent] = useState({})
   useEffect(() => {
     fetch(`/contents/${params.contentId}`)
-      .then((req) => { return req.json(); })
+      .then((res) => { return res.json(); })
       .then((json) => { setContent(json); });
-    dispatch(setField(null));
-  }, [dispatch, params.contentId])
+  }, [params.contentId])
 
   return (
-    <div className={styles.container}>
-      {
-        content
-          ?
-          <>
-            <div className={styles.header}>
-              <h1 className={styles.title}>{content.title}</h1>
-              <div className={styles.info}>
-                <p className={styles.author}>{content.author}</p>·
-                <p className={styles.date}>{content.date}</p>
+    <>
+      <div className={styles.container}>
+        {
+          content
+            ?
+            <>
+              <div className={styles.header}>
+                <h1 className={styles.title}>{content.title}</h1>
+                <div className={styles.info}>
+                  <p className={styles.author}>{content.author}</p>·
+                  <p className={styles.date}>{content.date}</p>
+                </div>
               </div>
-            </div>
-            <p className={styles.body}>{content.body}</p>
-          </>
-          :
-          <></>
-      }
-    </div>
+              <p className={styles.body}>{content.body}</p>
+            </>
+            :
+            <></>
+        }
+      </div>
+      <div className={styles.button}>
+      <button className={styles.back} type='button' onClick={() => { navigate(-1); }}>뒤로가기</button>
+      </div>
+      
+    </>
   );
 }
 

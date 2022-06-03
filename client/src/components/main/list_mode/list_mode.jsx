@@ -4,29 +4,25 @@ import Status from './status';
 import Search from './search';
 import Writing from './writing';
 import List from './list';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setField, setFieldIdx } from '../../../redux/reducer/field';
 import { setStatus } from '../../../redux/reducer/status';
 import { setContents } from '../../../redux/reducer/contents';
-import { setSearch } from '../../../redux/reducer/search';
+import { setSearch, setSearchText } from '../../../redux/reducer/search';
 
 function ListMode(props) {
-  const params = useParams();
+  const searchParams = useSearchParams()[0];
   const dispatch = useDispatch();
   useEffect(() => {
     fetch('/contents')
-      .then((req) => { return req.json(); })
+      .then((res) => { return res.json(); })
       .then((json) => { dispatch(setContents(json)); });
-    if (params.categoryId === undefined) {
-      dispatch(setField('전체'));
-      dispatch(setStatus('전체'))
-    } else {
-      dispatch(setFieldIdx(Number(params.categoryId)));
-      dispatch(setStatus('전체'))
-    }
-    dispatch(setSearch(''));
-  }, [dispatch, params.categoryId]);
+    if (searchParams.has('status')) { dispatch(setStatus(searchParams.get('status'))); }
+    else { dispatch(setStatus('전체')); }
+    if (searchParams.has('search')) { dispatch(setSearch(searchParams.get('search'))); dispatch(setSearchText(searchParams.get('search'))); }
+    else { dispatch(setSearch('')); dispatch(setSearchText((''))); }
+    console.log(searchParams.get('field'), searchParams.get('status'), searchParams.get('search'))
+  }, [dispatch, searchParams]);
 
   return (
     <>
