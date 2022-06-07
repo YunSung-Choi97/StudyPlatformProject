@@ -116,3 +116,17 @@ useState를 통해 관리하던 대부분의 state를 react-redux를 이용해 �
 react를 run 했을 때 뜨는 에러 메시지들 개선
 
 <br>
+
+### URL 변경, UI 변경 (22. 06. 03)
+
+리스트 모드의 URL 변경 (Parameter => Query String), URL에 따라 state가 변하도록 설정
+
+컨텐츠 모드 UI 변경
+
+<br>
+
+### 데이터베이스 연결, FE 리팩토링 (22.06.08)
+
+mysql 데이터베이스와 연결 및 DB로부터 contents 정보 불러오기
+
+URL 변경 과정에서 발생한 중복 부분들 함수로 변경
