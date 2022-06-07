@@ -21,7 +21,6 @@ function ListMode(props) {
     else { dispatch(setStatus('전체')); }
     if (searchParams.has('search')) { dispatch(setSearch(searchParams.get('search'))); dispatch(setSearchText(searchParams.get('search'))); }
     else { dispatch(setSearch('')); dispatch(setSearchText((''))); }
-    console.log(searchParams.get('field'), searchParams.get('status'), searchParams.get('search'))
   }, [dispatch, searchParams]);
 
   return (

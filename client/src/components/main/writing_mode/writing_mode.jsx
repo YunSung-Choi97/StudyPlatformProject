@@ -26,7 +26,7 @@ function WritingMode(props) {
         <textarea placeholder='내용을 입력해주세요.' name='body' rows='15' />
       </div>
       <div className={styles.button}>
-        <button className={styles.button1} type='button' onClick={() => { navigate(-1); }}>취소</button>
+        <button className={styles.button1} type='button' onClick={() => { navigate(-1); }}>뒤로가기</button>
         <button className={styles.button2} type='submit'>저장</button>
       </div>
     </form>

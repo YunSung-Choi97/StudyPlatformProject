@@ -21,8 +21,8 @@ function List(props) {
         if ((fieldCondition || (_field === content.field)) && (statusCondition || (_status === content.recruitment))) {
           if (content.title.includes(_search)) {
             return (
-              <li className={styles.container} key={content.id}>
-                <Link to={`/content/${content.id}`}>
+              <li className={styles.container} key={content.content_id}>
+                <Link to={`/content/${content.content_id}`}>
                   <div className={styles.item}>
                     <h3 className={styles.title}>{content.title}</h3>
                     <p className={styles.body}>{content.body}</p>
@@ -36,7 +36,7 @@ function List(props) {
                 </Link>
               </li>);
           }
-        } return <Fragment key={content.id}/>
+        } return <Fragment key={content.content_id}/>
       })}
     </ul>
   );

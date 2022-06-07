@@ -7,6 +7,21 @@ function Status(props) {
   const statuses = ['전체', '모집중', '모집완료'];
   const _status = useSelector((state) => state.status.value);
   const [searchParams, setSearchParams] = useSearchParams();
+  const changeStatusParams = (status) => {
+    if (searchParams.has('field')) {
+      if (searchParams.has('search')) {
+        setSearchParams({ field: searchParams.get('field'), status: status, search: searchParams.get('search') })
+      } else {
+        setSearchParams({ field: searchParams.get('field'), status: status })
+      }
+    } else {
+      if (searchParams.has('search')) {
+        setSearchParams({ status: status, search: searchParams.get('search') })
+      } else {
+        setSearchParams({ status: status })
+      }
+    }
+  }
   
   return (
     <ul className={styles.status}>
@@ -18,37 +33,13 @@ function Status(props) {
                 ?
                 <li>
                   <button className={styles.active} onClick={() => {
-                    if (searchParams.has('field')) {
-                      if (searchParams.has('search')) {
-                        setSearchParams({ field: searchParams.get('field'), status: status, search: searchParams.get('search') })
-                      } else {
-                        setSearchParams({ field: searchParams.get('field'), status: status })
-                      }
-                    } else {
-                      if (searchParams.has('search')) {
-                        setSearchParams({ status: status, search: searchParams.get('search') })
-                      } else {
-                        setSearchParams({ status: status })
-                      }
-                    }
+                    changeStatusParams(status);
                   }}>{status}</button>
                 </li>
                 :
                 <li>
                   <button onClick={() => {
-                    if (searchParams.has('field')) {
-                      if (searchParams.has('search')) {
-                        setSearchParams({ field: searchParams.get('field'), status: status, search: searchParams.get('search') })
-                      } else {
-                        setSearchParams({ field: searchParams.get('field'), status: status })
-                      }
-                    } else {
-                      if (searchParams.has('search')) {
-                        setSearchParams({ status: status, search: searchParams.get('search') })
-                      } else {
-                        setSearchParams({ status: status })
-                      }
-                    }
+                    changeStatusParams(status);
                   }}>{status}</button>
                 </li>
             }

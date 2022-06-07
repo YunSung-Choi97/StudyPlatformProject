@@ -9,24 +9,43 @@ function Search(props) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const _searchText = useSelector(state => state.search.searchText);
+  const changeSearchParams = (search) => {
+    if (search === undefined) {
+      if (searchParams.has('field')) {
+        if (searchParams.has('status')) {
+          setSearchParams({ field: searchParams.get('field'), status: searchParams.get('status') })
+        } else {
+          setSearchParams({ field: searchParams.get('field') })
+        }
+      } else {
+        if (searchParams.has('status')) {
+          setSearchParams({ status: searchParams.get('status') })
+        } else {
+          setSearchParams({})
+        }
+      }
+    } else {
+      if (searchParams.has('field')) {
+        if (searchParams.has('status')) {
+          setSearchParams({ field: searchParams.get('field'), status: searchParams.get('status'), search })
+        } else {
+          setSearchParams({ field: searchParams.get('field'), search })
+        }
+      } else {
+        if (searchParams.has('status')) {
+          setSearchParams({ status: searchParams.get('status'), search })
+        } else {
+          setSearchParams({ search })
+        }
+      }
+    }
+  }
 
   return (
     <>
       <form className={styles.container} onSubmit={(event) => {
         event.preventDefault();
-        if (searchParams.has('field')) {
-          if (searchParams.has('status')) {
-            setSearchParams({ field: searchParams.get('field'), status: searchParams.get('status'), search: _searchText })
-          } else {
-            setSearchParams({ field: searchParams.get('field'), search: _searchText })
-          }
-        } else {
-          if (searchParams.has('status')) {
-            setSearchParams({ status: searchParams.get('status'), search: _searchText })
-          } else {
-            setSearchParams({ search: _searchText })
-          }
-        }
+        changeSearchParams(_searchText);
       }}>
         <div className={styles.search_item}>
           <img className={styles.icon} src={icon} alt='search' />
@@ -35,19 +54,7 @@ function Search(props) {
         </div>
         <button className={styles.button} type='submit'>검색</button>
         <button className={styles.reset} type='button' onClick={() => {
-          if (searchParams.has('field')) {
-            if (searchParams.has('status')) {
-              setSearchParams({ field: searchParams.get('field'), status: searchParams.get('status') })
-            } else {
-              setSearchParams({ field: searchParams.get('field') })
-            }
-          } else {
-            if (searchParams.has('status')) {
-              setSearchParams({ status: searchParams.get('status') })
-            } else {
-              setSearchParams({})
-            }
-          }
+          changeSearchParams();
         }}>Reset</button>
       </form>
     </>

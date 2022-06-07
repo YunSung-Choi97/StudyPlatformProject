@@ -33,6 +33,7 @@
   height: 3rem;
   line-height: 1.4;
   overflow: hidden;
+  white-space: pre-wrap;
 }
 
 .classification div{
