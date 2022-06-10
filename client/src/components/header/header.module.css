@@ -21,7 +21,8 @@ header {
   display: flex;
 }
 
-.signin {
+.login,
+.logout {
   color: var(--primary);
   font-size: 1rem;
   font-weight: 500;
@@ -30,9 +31,11 @@ header {
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
+  width: 80px;
 }
 
-.signup {
+.signup,
+.myinfo {
   color: white;
   font-size: 1rem;
   font-weight: 500;
@@ -42,6 +45,7 @@ header {
   border-radius: 4px;
   background-color: var(--secondary);
   cursor: pointer;
+  width: 80px;
 }
 
 .navbar {

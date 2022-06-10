@@ -8,7 +8,7 @@ function WritingMode(props) {
   const navigate = useNavigate();
 
   return (
-    <form className={styles.container} action='/write' method='post'>
+    <form className={styles.container} action='/api/contents/write' method='post'>
       <div className={styles.input}>
         <input type='text' placeholder='제목을 입력해주세요.' name='title' />
       </div>

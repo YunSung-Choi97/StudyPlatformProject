@@ -7,7 +7,7 @@ function ContentMode(props) {
   const navigate = useNavigate();
   const [content, setContent] = useState({})
   useEffect(() => {
-    fetch(`/contents/${params.contentId}`)
+    fetch(`/api/contents/${params.contentId}`)
       .then((res) => { return res.json(); })
       .then((json) => { setContent(json); });
   }, [params.contentId])
