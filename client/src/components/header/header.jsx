@@ -6,11 +6,13 @@ import { setField } from '../../redux/reducer/field';
 import { setStatus } from '../../redux/reducer/status';
 import { setSearch, setSearchText } from '../../redux/reducer/search';
 import { setLogin, setLogout } from '../../redux/reducer/user';
+// import Account from './account';
 
 function Header(props) {
   const fields = ['전체', '어학', '취업', '고시/공무원', '취미/교양', '프로그래밍', '자율', '기타'];
   const _field = useSelector(state => state.field.value);
   const _isLogin = useSelector(state => state.user.isLogin);
+  const _userInfo = useSelector(state => state.user.userInfo);
   const searchParams = useSearchParams()[0];
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,18 +34,20 @@ function Header(props) {
     fetch('/api/auth/is_user')
       .then((res) => { return res.json(); })
       .then((user) => {
-        // 로그인
-        if (user.isLogin && _isLogin === false) {
-          var userInfo = {
-            id: user.id,
-            name: user.name,
-            nickname: user.nickname
-          };
-          dispatch(setLogin(userInfo));
-          // 로그아웃
-        } else if (user.isLogin === false && _isLogin) {
-          dispatch(setLogout());
-        };
+        if (user.isLogin !== _isLogin) {
+          // 로그인 처리
+          if (user.isLogin) {
+            var userInfo = {
+              id: user.id,
+              name: user.name,
+              nickname: user.nickname
+            };
+            dispatch(setLogin(userInfo));
+            // 로그아웃 처리
+          } else {
+            dispatch(setLogout());
+          }
+        }
       });
   }, [_isLogin, location.pathname, searchParams, dispatch]);
 
@@ -53,22 +57,32 @@ function Header(props) {
         <div className={styles.title}>
           <Link to='/'>Study Finding</Link>
         </div>
-        {
-          _isLogin
+        {_isLogin === undefined
+          ?
+          <div className={styles.account}>
+            <button className={styles.login}></button>
+            <button className={styles.signup}></button>
+          </div>
+          : (_isLogin === true
             ?
             <div className={styles.account}>
               <button className={styles.logout} onClick={() => {
-                fetch('/api/auth/logout').then(() => { window.location.href('/'); })
+                fetch('/api/auth/logout').then(() => {
+                  if ((window.location.pathname + window.location.search) === '/') { window.location.reload(); }
+                  else { window.location.href = '/'; }
+                })
               }}>로그아웃</button>
-              <button className={styles.myinfo}>내 정보</button>
+              <button className={styles.myinfo}>{_userInfo.nickname}</button>
             </div>
             :
             <div className={styles.account}>
               <button className={styles.login} onClick={() => {
                 navigate('/login');
               }}>로그인</button>
-              <button className={styles.signup}>회원가입</button>
-            </div>
+              <button className={styles.signup} onClick={() => {
+                navigate('/signup');
+              }}>회원가입</button>
+            </div>)
         }
       </div>
       <ul className={styles.navbar}>

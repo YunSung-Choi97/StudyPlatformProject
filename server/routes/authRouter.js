@@ -5,7 +5,7 @@ module.exports = (passport) => {
   // 로그인 상태 전송
   router.get('/is_user', (req, res) => {
     if (req.user) { res.json(req.user); }
-    else { res.json({ login: false }); };
+    else { res.json({ isLogin: false }); };
   });
 
   // login 요청 처리

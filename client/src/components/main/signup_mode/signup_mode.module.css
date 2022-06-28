@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 1rem auto;
+  border: 1px solid var(--gray-border);
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  width: 100%;
+}
+
+.id_box {
+  display: flex;
+  margin: 1rem;
+}
+
+.id_box input {
+  width: 200px;
+  height: 40px;
+  padding: 0.5rem;
+}
+
+.id_box button {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid var(--gray-border);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.id_box p {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  color: var(--secondary);
+}
+
+.pwd_box {
+  display: flex;
+  margin: 1rem;
+}
+
+.pwd_box input {
+  width: 200px;
+  height: 40px;
+  padding: 0.5rem;
+}
+
+.pwd_box p {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  color: var(--secondary);
+}
+
+.name_box {
+  display: flex;
+  margin: 1rem;
+}
+
+.name_box input {
+  width: 200px;
+  height: 40px;
+  padding: 0.5rem;
+}
+
+.nickname_box {
+  display: flex;
+  margin: 1rem;
+}
+
+.nickname_box input {
+  width: 200px;
+  height: 40px;
+  padding: 0.5rem;
+}
+
+.nickname_box button {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid var(--gray-border);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.nickname_box p {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  color: var(--secondary);
+}
+
+.button {
+  display: flex;
+  justify-content: right;
+  margin: 1rem 0;
+}
+
+.submit_button {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.3rem 0.5rem;
+  margin-left: 0.5rem;
+  border: 1px solid var(--secondary);
+  border-radius: 4px;
+  background-color: var(--secondary);
+  cursor: pointer;
+  width: 80px;
+  height: 36px;
+}

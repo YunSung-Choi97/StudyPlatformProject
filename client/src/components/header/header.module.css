@@ -32,6 +32,7 @@ header {
   background-color: white;
   cursor: pointer;
   width: 80px;
+  height: 36px;
 }
 
 .signup,
@@ -46,6 +47,7 @@ header {
   background-color: var(--secondary);
   cursor: pointer;
   width: 80px;
+  height: 36px;
 }
 
 .navbar {
