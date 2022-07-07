@@ -1,0 +1,23 @@
+{
+  "name": "dev-community-website-front",
+  "version": "1.0.0",
+  "author": "Yunsung-Choi",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
+    "next": "^12.2.0",
+    "next-redux-wrapper": "^7.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0",
+    "redux-logger": "^3.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.19.0"
+  }
+}
