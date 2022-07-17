@@ -1,0 +1,23 @@
+.status {
+  display: flex;
+  padding: 0;
+}
+
+.status button {
+  color: var(--font-gray);
+  background-color: var(--bg-color);
+  border: unset;
+  font-size: 1rem;
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+}
+
+.status button:hover {
+  color: var(--font-gray-hover);
+}
+
+button.active {
+  color: var(--dcw-color) !important;
+  font-weight: 500;
+  border-bottom: 2px solid var(--dcw-color);
+}

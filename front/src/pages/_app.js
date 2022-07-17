@@ -1,8 +1,8 @@
-import Header from '../components/header';
+import Header from '../components/header/header';
 import wrapper from '../redux/store';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <Header />
@@ -11,4 +11,4 @@ function MyApp({ Component, pageProps }) {
   );
 };
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(App);

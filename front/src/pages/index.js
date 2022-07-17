@@ -1,21 +1,15 @@
-import Head from 'next/head';
-import { useSelector, useDispatch } from 'react-redux'
+import Main from '../components/main';
+import Seo from '../components/seo';
 
-function Index() {
-  const dispatch = useDispatch();
-  const _user = useSelector(state => state.user);
-  console.log(_user);
+const Home = () => {
   return (
     <>
-      <Head>
-        <meta charSet='utf-8' />
-        <title>DCW project</title>
-      </Head>
-      <div>
-
-      </div>
+      <Seo title='DCW' />
+      <Main>
+        메인 페이지
+      </Main>
     </>
   );
 };
 
-export default Index;
+export default Home;
