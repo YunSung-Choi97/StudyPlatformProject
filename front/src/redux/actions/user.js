@@ -32,9 +32,9 @@ export const signup = createAsyncThunk('user/signup', async (data, { rejectWithV
   }
 });
 
-export const test = createAsyncThunk('user/test', async (data, { rejectWithValue }) => {
+export const loadMyInfo = createAsyncThunk('user/loadMyInfo', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.get('/user/test');
+    const response = await axios.get('/user/loadMyInfo');
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);

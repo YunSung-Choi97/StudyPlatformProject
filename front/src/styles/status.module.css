@@ -8,8 +8,9 @@
   background-color: var(--bg-color);
   border: unset;
   font-size: 1rem;
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
+  height: 2.5rem;
 }
 
 .status button:hover {

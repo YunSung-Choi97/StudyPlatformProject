@@ -1,18 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { login, logout, signup, test } from '../actions/user';
+import { login, logout, signup, loadMyInfo } from '../actions/user';
 
 const initialState = {
-  isLoggedIn: false,
-  userInfo: null,
-  loginLoading: false,
-  loginErrorMessage: null,
-  logoutLoading: false,
-  logoutErrorMessage: null,
-  signupLoading: false,
-  signupDone: null,
-  signupErrorMessage: null,
-  test: null,
+  isLoggedIn: false,  // 로그인 상태
+  myInfo: null,  // 내 정보
+
+  // 로그인 요청
+  loginLoading: false,  // 처리 상태
+  loginErrorMessage: null,  // 실패 메시지
+
+  // 로그아웃 요청
+  logoutLoading: false,  // 처리 상태
+  logoutErrorMessage: null,  // 실패 메시지
+
+  // 회원가입 요청
+  signupLoading: false,  // 처리 상태
+  signupDone: null,  // 성공 메시지
+  signupErrorMessage: null,  // 실패 메시지
+
+  // 내 정보 불러오기 요청
+  loadMyInfoLoading: false,  // 처리 상태
+  loadMyInfoErrorMessage: null,  // 실패 메시지
 };
 
 const userSlice = createSlice({
@@ -21,7 +30,7 @@ const userSlice = createSlice({
   reducers: {
     setLoginTest: (state, action) => {
       state.isLoggedIn = true;
-      state.userInfo = action.payload;
+      state.myInfo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -31,7 +40,7 @@ const userSlice = createSlice({
     })
     builder.addCase(login.fulfilled, (state, action) => {
       state.isLoggedIn = true;
-      state.userInfo = action.payload;
+      state.myInfo = action.payload;
       state.loginLoading = false;
     })
     builder.addCase(login.rejected, (state, action) => {
@@ -42,9 +51,9 @@ const userSlice = createSlice({
     builder.addCase(logout.pending, (state) => {
       state.logoutLoading = true;
     })
-    builder.addCase(logout.fulfilled, (state, action) => {
+    builder.addCase(logout.fulfilled, (state) => {
       state.isLoggedIn = false;
-      state.userInfo = null;
+      state.myInfo = null;
       state.logoutLoading = false;
     })
     builder.addCase(logout.rejected, (state, action) => {
@@ -63,15 +72,18 @@ const userSlice = createSlice({
       state.signupLoading = false;
       state.signupErrorMessage = action.payload;
     })
-    // debug
-    builder.addCase(test.pending, (state) => {
-      state.test = '테스트중';
+    // 내 정보 불러오기
+    builder.addCase(loadMyInfo.pending, (state) => {
+      state.loadMyInfoLoading = true;
     })
-    builder.addCase(test.fulfilled, (state) => {
-      state.test = '테스트 요청성공';
+    builder.addCase(loadMyInfo.fulfilled, (state, action) => {
+      state.loadMyInfoLoading = false;
+      state.isLoggedIn = action.payload.isLoggedIn;
+      state.myInfo = action.payload.myInfo;
     })
-    builder.addCase(test.rejected, (state) => {
-      state.test = '테스트 요청실패';
+    builder.addCase(loadMyInfo.rejected, (state, action) => {
+      state.loadMyInfoLoading = false;
+      state.loadMyInfoErrorMessage = action.payload;
     })
   }
 });

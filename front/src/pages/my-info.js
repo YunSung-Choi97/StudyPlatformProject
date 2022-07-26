@@ -1,16 +1,16 @@
 import axios from 'axios';
 
-import Main from '../../components/main';
-import Seo from '../../components/seo';
-import { loadMyInfo } from '../../redux/actions/user';
-import wrapper from '../../redux/store';
+import Main from '../components/main';
+import Seo from '../components/seo';
+import { loadMyInfo } from '../redux/actions/user';
+import wrapper from '../redux/store';
 
-const Contest = () => {
+const MyInfo = () => {
   return (
     <>
       <Seo title='DCW' />
       <Main>
-        공모전 페이지
+        내 정보 페이지
       </Main>
     </>
   );
@@ -32,4 +32,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default Contest;
+export default MyInfo;

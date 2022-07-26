@@ -1,10 +1,12 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Main from '../components/main';
 import Seo from '../components/seo';
-import { login } from '../redux/actions/user';
+import { loadMyInfo, login } from '../redux/actions/user';
+import wrapper from '../redux/store';
 import styles from '../styles/login.module.css';
 
 const Login = () => {
@@ -23,7 +25,9 @@ const Login = () => {
 
   // 로그인 성공시 홈화면으로 이동
   useEffect(() => {
-    if (isLoggedIn) { router.replace('/'); }
+    if (isLoggedIn) {
+      router.replace('/');
+    }
   }, [isLoggedIn]);
 
   // 로그인 실패시 사유표현
@@ -52,5 +56,21 @@ const Login = () => {
     </>
   );
 };
+
+// SSR
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+  // 현재 브라우저에서 로그인을 하면서 생성된 쿠키가 있는지 확인
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (context.req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+
+  await store.dispatch(loadMyInfo());
+
+  return {
+    props: {},
+  };
+});
 
 export default Login;

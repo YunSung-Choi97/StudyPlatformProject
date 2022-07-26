@@ -6,7 +6,7 @@ import { logout } from '../../redux/actions/user';
 import styles from '../../styles/header.module.css';
 
 const User = () => {
-  const { isLoggedIn, userInfo } = useSelector((state) => state.user);
+  const { isLoggedIn, myInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -16,9 +16,9 @@ const User = () => {
   const moveSignupPage = useCallback(() => {
     router.push('/signup');
   }, []);
-  const LogoutAndMoveHome = useCallback(() => {
-    dispatch(logout({ id: userInfo.id }));
-  }, [userInfo]);
+  const logoutAndMoveHome = useCallback(() => {
+    dispatch(logout({ id: myInfo.id }));
+  }, [myInfo]);
   const moveMyInfoPage = useCallback(() => {
     router.push('/my-info');
   }, []);
@@ -28,11 +28,11 @@ const User = () => {
       {isLoggedIn
         ?
         <div className={styles.user}>
-          <button className={styles.logout} onClick={LogoutAndMoveHome}>
+          <button className={styles.logout} onClick={logoutAndMoveHome}>
             로그아웃
           </button>
           <button className={styles.my_info} onClick={moveMyInfoPage}>
-            내정보
+            내 정보
           </button>
         </div>
         :

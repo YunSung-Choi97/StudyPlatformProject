@@ -1,11 +1,14 @@
+import axios from 'axios';
+
 import Main from '../../components/main';
 import Seo from '../../components/seo';
 import FunctionalPart from '../../components/functional_part';
-import setPageState from '../../hooks/set_page_state';
-// import wrapper from '../../redux/store';
+import wrapper from '../../redux/store';
+import { loadMyInfo } from '../../redux/actions/user';
+import { setPage } from '../../redux/reducers/page';
 
 const Study = () => {
-  setPageState('find-member', 'study');
+  // setPageState('find-member', 'study');
 
   return (
     <>
@@ -18,29 +21,27 @@ const Study = () => {
 };
 
 // SSR
-// export const getServerSideProps = wrapper.getServerSideProps((store) => (context) => {
-//   console.log('스토어');
-//   console.log(store);
-//   console.log('콘텍스트');
-//   console.log(context);
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+  // 1. 로그인 상태 확인 및 내 정보 불러오기
+  // 현재 브라우저에서 로그인을 하면서 생성된 쿠키가 있는지 확인
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (context.req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  await store.dispatch(loadMyInfo());
 
-//   if (context.query.status) {
-//     store.dispatch(setPageAndStatus({
-//       category: 'find-member',
-//       section: 'study',
-//       status: context.query.status
-//     }));
-//   } else {
-//     store.dispatch(setPageAndStatus({
-//       category: 'find-member',
-//       section: 'study',
-//       status: '전체'
-//     }));
-//   }
+  // 2. 페이지 상태 설정
+  const status = context.query.status ? context.query.status : '전체';
+  store.dispatch(setPage({
+    category: 'find-member',
+    section: 'study',
+    status
+  }));
 
-//   return {
-//     props: {},
-//   };
-// });
+  return {
+    props: {},
+  };
+});
 
 export default Study;
