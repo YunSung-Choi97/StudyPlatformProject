@@ -7,6 +7,7 @@ import Main from '../components/main';
 import Seo from '../components/seo';
 import useInput from '../hooks/use_input';
 import { loadMyInfo, signup } from '../redux/actions/user';
+import { signupEnd } from '../redux/reducers/user';
 import wrapper from '../redux/store';
 import styles from '../styles/signup.module.css';
 
@@ -22,7 +23,19 @@ const Signup = () => {
   const [inputNickname, changeInputNickname] = useInput('');
 
   // id 중복 확인
-  const [idConfirmation, setIdConfirmation] = useState(undefined);
+  const [idVerification, setIdVerification] = useState(undefined);
+  const verifyIdHandler = useCallback(async () => {
+    try {
+      const response = await axios.post('/user/verify-id', { inputId: inputId });
+      setIdVerification(true);
+      alert(response.data);
+    } catch (error) {
+      if (error.response.status === 401) {
+        setIdVerification(false);
+      }
+      alert(error.response.data);
+    }
+  }, [inputId]);
 
   // password 일치 확인
   const [inputPasswordCheck, setInputPasswordCheck] = useState('');
@@ -33,45 +46,53 @@ const Signup = () => {
   }, [inputPassword, inputPasswordCheck]);
 
   // nickname 중복 확인
-  const [nicknameConfirmation, setNicknameConfirmation] = useState(undefined);
-
-  // 중복확인
-  const confirmation_handler = useCallback(() => {
-
-  }, []);
+  const [nicknameVerification, setnicknameVerification] = useState(undefined);
+  const verifyNicknameHandler = useCallback(async () => {
+    try {
+      const response = await axios.post('/user/verify-nickname', { inputNickname: inputNickname });
+      setnicknameVerification(true);
+      alert(response.data);
+    } catch (error) {
+      if (error.response.status === 401) {
+        setnicknameVerification(false);
+      }
+      alert(error.response.data);
+    }
+  }, [inputNickname]);
 
   // 회원가입 요청
   const submit_handler = useCallback(() => {
     // id 중복확인 결과 확인
-    // 코드 미작성
-
+    if (!idVerification) {
+      return alert('아이디 중복확인이 필요합니다.');
+    }
     // 비밀번호 일치 재확인
     if (inputPassword !== inputPasswordCheck) {
       console.log(`회원가입 실패 : ${inputId}, ${inputPassword}, ${inputPasswordCheck}, ${inputName}, ${inputNickname}`);
       return setPasswordConfirmation(false);
     }
-
     // nickname 중복확인 결과 재확인
-    // 코드 미작성
+    if (!nicknameVerification) {
+      return alert('닉네임 중복확인이 필요합니다.');
+    }
 
     // 유효한 입력정보 제출
     dispatch(signup({ inputId, inputPassword, inputName, inputNickname }));
-  }, [inputId, inputPassword, inputPasswordCheck, inputName, inputNickname]);
+  }, [inputId, inputPassword, inputPasswordCheck, inputName, inputNickname, idVerification, nicknameVerification]);
 
-  // 회원가입 성공시 홈화면으로 이동
+  // 회원가입 요청 결과 처리
   useEffect(() => {
+    // 회원가입 성공
     if (signupDone) {
       alert(signupDone);
       router.replace('/login');
     }
-  }, [signupDone]);
-
-  // 회원가입 실패시 사유표현
-  useEffect(() => {
+    // 회원가입 실패
     if (signupErrorMessage) {
       alert(signupErrorMessage);
     }
-  }, [signupErrorMessage]);
+    dispatch(signupEnd());
+  }, [signupDone, signupErrorMessage]);
 
   return (
     <>
@@ -80,8 +101,8 @@ const Signup = () => {
         <div className={styles.container}>
           <div className={styles.id_box}>
             <input type='text' name='inputId' placeholder='아이디' value={inputId} onChange={changeInputId} required />
-            <button type='button' onClick={confirmation_handler}>중복확인</button>
-            {idConfirmation === false && <p>아이디 중복확인이 필요합니다</p>}
+            <button type='button' onClick={verifyIdHandler}>중복확인</button>
+            {idVerification === false && <p>이미 존재하는 아이디입니다.</p>}
           </div>
           <div className={styles.password_box}>
             <input type='password' name='inputPassword' placeholder='비밀번호' value={inputPassword} onChange={changeInputPassword} required />
@@ -95,8 +116,8 @@ const Signup = () => {
           </div>
           <div className={styles.nickname_box}>
             <input type='text' name='inputNickname' placeholder='닉네임' value={inputNickname} onChange={changeInputNickname} required />
-            <button type='button' onClick={confirmation_handler}>중복확인</button>
-            {nicknameConfirmation === false && <p>닉네임 중복확인이 필요합니다</p>}
+            <button type='button' onClick={verifyNicknameHandler}>중복확인</button>
+            {nicknameVerification === false && <p>이미 존재하는 닉네임입니다.</p>}
           </div>
         </div>
         <div className={styles.button}>

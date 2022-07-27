@@ -34,7 +34,7 @@ export const signup = createAsyncThunk('user/signup', async (data, { rejectWithV
 
 export const loadMyInfo = createAsyncThunk('user/loadMyInfo', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.get('/user/loadMyInfo');
+    const response = await axios.get('/user/load-my-info');
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);

@@ -28,9 +28,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setLoginTest: (state, action) => {
-      state.isLoggedIn = true;
-      state.myInfo = action.payload;
+    signupEnd: (state) => {
+      state.signupDone = null;
+      state.signupErrorMessage = null;
     },
   },
   extraReducers: (builder) => {
@@ -88,6 +88,6 @@ const userSlice = createSlice({
   }
 });
 
-export const { setLoginTest } = userSlice.actions;
+export const { signupEnd } = userSlice.actions;
 
 export default userSlice;

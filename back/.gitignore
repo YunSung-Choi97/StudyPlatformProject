@@ -3,3 +3,5 @@
 .env
 
 /lib/database/ERD.png
+/lib/database/setting.sql
+/lib/database/dummy_data
