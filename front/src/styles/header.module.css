@@ -43,6 +43,32 @@
   color: var(--dcw-color);
 }
 
+.community:hover::before {
+  border-color: rgb(0 0 0 / 20%) transparent;
+  border-style: solid;
+  border-width: 0 6px 8px 6.5px;
+  content: '';
+  display: block;
+  left: 75px;
+  position: absolute;
+  top: calc(100% - 12px);
+  left: 25px;
+  z-index: 0;
+}
+
+.community:hover::after {
+  border-color: white transparent;
+  border-style: solid;
+  border-width: 0 6px 8px 6.5px;
+  content: '';
+  display: block;
+  left: 75px;
+  position: absolute;
+  top: calc(100% - 11px);
+  left: 25px;
+  z-index: 1;
+}
+
 .find_member:hover::before {
   border-color: rgb(0 0 0 / 20%) transparent;
   border-style: solid;

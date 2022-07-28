@@ -16,9 +16,22 @@ const Header = () => {
         </div>
         <nav className={styles.nav}>
           <div className={styles.community}>
-            <Link href='/community'>
-              <a>커뮤니티</a>
-            </Link>
+            <div>
+              <Link href='/community'>
+                <a>커뮤니티</a>
+              </Link>
+            </div>
+            <div className={styles.community_dropdown}>
+              <Link href='/community/free'>
+                <a>자유 게시판</a>
+              </Link>
+              <Link href='/community/question'>
+                <a>질문 게시판</a>
+              </Link>
+              <Link href='/community/information'>
+                <a>정보 게시판</a>
+              </Link>
+            </div>
           </div>
           <div className={styles.find_member}>
             <div>
