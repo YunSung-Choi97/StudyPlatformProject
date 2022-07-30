@@ -3,9 +3,10 @@ import axios from 'axios';
 import Main from '../../components/main';
 import Seo from '../../components/seo';
 import FunctionalPart from '../../components/functional_part';
-import wrapper from '../../redux/store';
+import Posts from '../../components/posts';
 import { loadMyInfo } from '../../redux/actions/user';
 import { setPage } from '../../redux/reducers/page';
+import wrapper from '../../redux/store';
 
 const Study = () => {
   // setPageState('find-member', 'study');
@@ -15,6 +16,7 @@ const Study = () => {
       <Seo title='DCW' />
       <Main>
         <FunctionalPart />
+        <Posts />
       </Main>
     </>
   );
