@@ -1,0 +1,21 @@
+.posts {
+  padding: 0;
+  border-top: 1px solid var(--border-gray);
+}
+
+.post {
+  border-bottom: 1px solid var(--border-gray);
+  padding: 1rem;
+}
+
+.title {
+  margin: 1rem 0;
+}
+
+.body {
+  margin: 1rem 0;
+}
+
+.info {
+  margin: 2rem 0 0.5rem 0;
+}

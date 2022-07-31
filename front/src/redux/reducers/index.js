@@ -3,6 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import userSlice from './user';
 import pageSlice from './page';
+import postSlice from './post';
 
 const rootReducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +13,7 @@ const rootReducer = (state, action) => {
       const combineReducer = combineReducers({
         user: userSlice.reducer,
         page: pageSlice.reducer,
+        post: postSlice.reducer,
       });
       return combineReducer(state, action);
     }

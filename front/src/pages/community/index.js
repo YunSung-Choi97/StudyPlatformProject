@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+import FunctionalPart from '../../components/functional_part';
 import Main from '../../components/main';
+import Posts from '../../components/posts';
 import Seo from '../../components/seo';
+import { loadPosts } from '../../redux/actions/post';
 import { loadMyInfo } from '../../redux/actions/user';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
@@ -11,7 +14,8 @@ const Community = () => {
     <>
       <Seo title='DCW' />
       <Main>
-        커뮤니티 페이지
+        <FunctionalPart />
+        <Posts />
       </Main>
     </>
   );
@@ -30,6 +34,13 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   // 2. 페이지 상태 설정
   store.dispatch(setPage({
+    category: 'community',
+    section: null,
+    status: null
+  }));
+
+  // 3. 데이터 불러오기
+  await store.dispatch(loadPosts({
     category: 'community',
     section: null,
     status: null

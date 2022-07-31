@@ -1,16 +1,15 @@
 import axios from 'axios';
 
-import Main from '../../components/main';
-import Seo from '../../components/seo';
 import FunctionalPart from '../../components/functional_part';
+import Main from '../../components/main';
 import Posts from '../../components/posts';
+import Seo from '../../components/seo';
+import { loadPosts } from '../../redux/actions/post';
 import { loadMyInfo } from '../../redux/actions/user';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';
 
 const Study = () => {
-  // setPageState('find-member', 'study');
-
   return (
     <>
       <Seo title='DCW' />
@@ -36,6 +35,13 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   // 2. 페이지 상태 설정
   const status = context.query.status ? context.query.status : '전체';
   store.dispatch(setPage({
+    category: 'find-member',
+    section: 'study',
+    status
+  }));
+
+  // 3. 데이터 불러오기
+  await store.dispatch(loadPosts({
     category: 'find-member',
     section: 'study',
     status
