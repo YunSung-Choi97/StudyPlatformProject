@@ -4,6 +4,7 @@ import FunctionalPart from '../../components/functional_part';
 import Main from '../../components/main';
 import Posts from '../../components/posts';
 import Seo from '../../components/seo';
+import Sort from '../../components/sort';
 import { loadPosts } from '../../redux/actions/post';
 import { loadMyInfo } from '../../redux/actions/user';
 import { setPage } from '../../redux/reducers/page';
@@ -15,6 +16,7 @@ const Study = () => {
       <Seo title='DCW' />
       <Main>
         <FunctionalPart />
+        <Sort />
         <Posts />
       </Main>
     </>

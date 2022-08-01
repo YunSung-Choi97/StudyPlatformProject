@@ -5,6 +5,7 @@ const initialState = {
   section: null,
   status: null,
   search: null,
+  page: null,
 };
 
 const pageSlice = createSlice({
@@ -12,25 +13,15 @@ const pageSlice = createSlice({
   initialState,
   reducers: {
     setPage: (state, action) => {
-      state.category = action.payload.category;
-      state.section = action.payload.section;
-      state.status = action.payload.status;
-    },
-    setCategory: (state, action) => {
-      state.category = action.payload;
-    },
-    setSection: (state, action) => {
-      state.section = action.payload;
-    },
-    setStatus: (state, action) => {
-      state.status = action.payload;
-    },
-    setSearch: (state, action) => {
-      state.search = action.payload;
+      state.category = action.payload.category ? action.payload.category : null;
+      state.section = action.payload.section ? action.payload.section : null;
+      state.status = action.payload.status ? action.payload.status : null;
+      state.search = action.payload.search ? action.payload.search : null;
+      state.page = action.payload.page ? action.payload.page : null;
     },
   },
 });
 
-export const { setPage, setCategory, setSection, setStatus, setSearch } = pageSlice.actions;
+export const { setPage } = pageSlice.actions;
 
 export default pageSlice;

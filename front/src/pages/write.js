@@ -1,17 +1,13 @@
-import axios from 'axios';
-
 import Main from '../components/main';
 import Seo from '../components/seo';
-import { loadMyInfo } from '../redux/actions/user';
 import { setPage } from '../redux/reducers/page';
-import wrapper from '../redux/store';
 
-const MyInfo = () => {
+const Write = () => {
   return (
     <>
       <Seo title='DCW' />
       <Main>
-        내 정보 페이지
+        글쓰기 페이지
       </Main>
     </>
   );
@@ -30,7 +26,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   // 2. 페이지 상태 설정
   store.dispatch(setPage({
-    category: 'my-info'
+    category: 'write'
   }));
 
   return {
@@ -38,4 +34,4 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   };
 });
 
-export default MyInfo;
+export default Write;

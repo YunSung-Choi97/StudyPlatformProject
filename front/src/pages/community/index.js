@@ -34,9 +34,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   // 2. 페이지 상태 설정
   store.dispatch(setPage({
-    category: 'community',
-    section: null,
-    status: null
+    category: 'community'
   }));
 
   // 3. 데이터 불러오기
