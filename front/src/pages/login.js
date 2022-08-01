@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Main from '../components/main';
 import Seo from '../components/seo';
 import { loadMyInfo, login } from '../redux/actions/user';
+import { setPage } from '../redux/reducers/page';
 import wrapper from '../redux/store';
 import styles from '../styles/login.module.css';
 
@@ -70,9 +71,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   // 2. 페이지 상태 설정
   store.dispatch(setPage({
-    category: 'login',
-    section: null,
-    status: null
+    category: 'login'
   }));
 
   return {

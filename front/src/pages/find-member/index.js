@@ -36,7 +36,6 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   const status = context.query.status ? context.query.status : '전체';
   store.dispatch(setPage({
     category: 'find-member',
-    section: null,
     status
   }));
 
