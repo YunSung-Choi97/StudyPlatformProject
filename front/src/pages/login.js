@@ -24,14 +24,14 @@ const Login = () => {
     }));
   }, []);
 
-  // 로그인 성공시 홈화면으로 이동
+  // 로그인 성공
   useEffect(() => {
     if (isLoggedIn) {
       router.replace('/');
     }
   }, [isLoggedIn]);
 
-  // 로그인 실패시 사유표현
+  // 로그인 실패
   useEffect(() => {
     if (loginErrorMessage) {
       alert(loginErrorMessage);

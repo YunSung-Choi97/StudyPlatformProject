@@ -48,4 +48,29 @@ router.post('/load-posts', (req, res) => {
   }
 });
 
+// 새로운 게시글 추가
+router.post('/new-post', isLoggedIn, (req, res) => {
+  try {
+    const sql1 = `INSERT INTO post (post_writer_id, post_title, post_category, post_section, post_status, post_created_date, post_content, post_views, post_like_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    const now = getNow()
+    const values = req.body.section !== '선택'
+      ? req.body.category === '팀원 찾기'
+        ? [req.body.id, req.body.title, req.body.category, req.body.section, '모집중', now, req.body.content, 0, 0]
+        : [req.body.id, req.body.title, req.body.category, req.body.section, null, now, req.body.content, 0, 0]
+      : req.body.category === '팀원 찾기'
+        ? [req.body.id, req.body.title, req.body.category, null, '모집중', now, req.body.content, 0, 0]
+        : [req.body.id, req.body.title, req.body.category, null, null, now, req.body.content, 0, 0];
+    db.query(sql1, values, (error, result) => {
+      if (error) { throw error; }
+      return res.status(200).json({
+        message: '게시글이 새로 추가되었습니다.',
+        id: result.insertId,
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send('게시글 작성에 실패하였습니다.');
+  }
+});
+
 module.exports = router;

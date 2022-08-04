@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid var(--border-gray);
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  width: 100%;
+}
+
+.title_box {
+  display: flex;
+  align-items: center;
+  margin: 0.75rem;
+}
+
+.title_box p {
+  width: 50px;
+  align-items: center;
+}
+
+.title_box input {
+  font-size: 14px;
+  width: 798px;
+  height: 45px;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.title_box input:focus {
+  outline: none;
+}
+
+.classification_box {
+  display: flex;
+  align-items: center;
+  margin: 0.75rem;
+}
+
+.classification_box p {
+  width: 50px;
+  align-items: center;
+}
+
+.classification_box div {
+  margin-right: 2rem;
+}
+
+.classification_box select {
+  font-size: 14px;
+  width: 130px;
+  height: 45px;
+  padding: 0.5rem;
+}
+
+.content_box {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0.75rem;
+}
+
+.content_box textarea {
+  font-size: 14px;
+  width: 100%;
+  height: calc(100vh - 450px);
+  padding: 0.75rem;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.content_box textarea:focus {
+  outline: none;
+}
+
+.button {
+  display: flex;
+  justify-content: right;
+  margin: 1rem 0;
+}
+
+.back_button {
+  width: 150px;
+  height: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0 12px;
+  border: 2px solid var(--bg-gray);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--font-gray);
+}
+
+.submit_button {
+  width: 150px;
+  height: 50px;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0 12px;
+  margin-left: 1rem;
+  border: 1px solid var(--dcw-color);
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--dcw-color);
+  color: white;
+}
