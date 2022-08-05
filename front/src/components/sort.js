@@ -1,4 +1,4 @@
-import ToggleSwitch from "./toggle_switch";
+import ToggleSwitch from './toggle_switch';
 import styles from '../styles/sort.module.css';
 
 const Sort = () => {

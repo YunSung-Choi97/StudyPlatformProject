@@ -6,6 +6,20 @@ const getNow = require('../lib/get_now');
 
 const router = express.Router();
 
+// post 불러오기
+router.post('/load-post', (req, res) => {
+  try {
+    const sql = `SELECT * FROM post WHERE post_id = ?;`;
+    db.query(sql, req.body.id, (error, result) => {
+      if (error) { throw error; }
+      return res.status(200).json(result[0]);
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500);
+  }
+});
+
 // posts 불러오기
 router.post('/load-posts', (req, res) => {
   try {

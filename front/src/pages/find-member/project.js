@@ -35,6 +35,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   // 2. 페이지 상태 설정
   const status = context.query.status ? context.query.status : '전체';
   store.dispatch(setPage({
+    name: 'posts',
     category: 'find-member',
     section: 'project',
     status

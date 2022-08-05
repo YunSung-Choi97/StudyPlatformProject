@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Fragment } from "react";
-import { useSelector } from "react-redux";
+import Link from 'next/link';
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 
 import styles from '../styles/posts.module.css';
 
@@ -27,6 +27,6 @@ const Posts = () => {
       })}
     </ul>
   );
-}
+};
 
 export default Posts;

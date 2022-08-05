@@ -142,7 +142,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   // 2. 페이지 상태 설정
   store.dispatch(setPage({
-    category: 'signup'
+    name: 'signup'
   }));
 
   return {

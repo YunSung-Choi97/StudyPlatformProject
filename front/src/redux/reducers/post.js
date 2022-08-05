@@ -1,14 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { loadPosts, newPost } from '../actions/post';
+import { loadPost, loadPosts, newPost } from '../actions/post';
 
 const initialState = {
+  // post 불러오기
+  post: null,
+  loadPostLoading: false,
+  loadPostErrorMessage: null,
+
   // posts 불러오기
   posts: null,
   loadPostsLoading: false,
   loadPostsErrorMessage: null,
 
-  // 새로운 글 작성하기
+  // 새로운 게시글 작성하기
   newPostLoading: false,
   newPostDone: null,
   newPostErrorMessage: null,
@@ -21,7 +26,20 @@ const postSlice = createSlice({
 
   },
   extraReducers: (builder) => {
-    // post 정보들 불러오기
+    // post 불러오기
+    builder.addCase(loadPost.pending, (state) => {
+      state.loadPostLoading = true;
+    })
+    builder.addCase(loadPost.fulfilled, (state, action) => {
+      state.post = action.payload;
+      state.loadPostLoading = false;
+      state.loadPostErrorMessage = null;
+    })
+    builder.addCase(loadPost.rejected, (state, action) => {
+      state.loadPostLoading = false;
+      state.loadPostErrorMessage = action.payload;
+    })
+    // posts 불러오기
     builder.addCase(loadPosts.pending, (state) => {
       state.loadPostsLoading = true;
     })
@@ -34,7 +52,7 @@ const postSlice = createSlice({
       state.loadPostsLoading = false;
       state.loadPostsErrorMessage = action.payload;
     })
-    // 새로운 게시글 추가하기
+    // 새로운 게시글 작성하기
     builder.addCase(newPost.pending, (state) => {
       state.newPostLoading = true;
     })
