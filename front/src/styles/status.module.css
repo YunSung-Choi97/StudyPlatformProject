@@ -1,23 +1,24 @@
-.status {
+.container {
   display: flex;
   padding: 0;
+  margin: 0;
 }
 
-.status button {
+.container button {
   color: var(--font-gray);
   background-color: var(--bg-color);
   border: unset;
   font-size: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
   height: 2.5rem;
 }
 
-.status button:hover {
+.container button:hover {
   color: var(--font-gray-hover);
 }
 
-button.active {
+.container button.active {
   color: var(--dcw-color) !important;
   font-weight: 500;
   border-bottom: 2px solid var(--dcw-color);

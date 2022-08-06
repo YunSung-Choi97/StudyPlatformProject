@@ -9,7 +9,7 @@ const Posts = () => {
   const { posts } = useSelector((state) => state.post);
 
   return (
-    <ul className={styles.posts}>
+    <ul className={styles.container}>
       {posts && posts.map((post) => {
         return (
           <Fragment key={post.post_id}>
