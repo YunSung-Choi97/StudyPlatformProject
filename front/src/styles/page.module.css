@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  align-items: center;
+  margin: 3rem 0;
+}
+
+.page_numbers {
+  display: flex;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.side_button {
+  height: 2rem;
+  padding: 0 1rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.jump_button {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.page_button {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.current_page_button {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem;
+  border: 1px solid var(--dcw-color);
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  background-color: var(--dcw-color);
+}

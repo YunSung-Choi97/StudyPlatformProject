@@ -3,15 +3,16 @@ import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import changeQuery from '../hooks/change_query';
 import searchIcon from '../images/search_icon.png';
 import styles from '../styles/search.module.css';
 
 const Search = () => {
-  const { category, section, search } = useSelector((state) => state.page);
+  const { category, section, status, search, page } = useSelector((state) => state.page);
   const router = useRouter();
 
   // 검색어
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState(search ? search : '');
   const changeSearchText = useCallback((event) => {
     setSearchText(event.target.value);
   }, [searchText, setSearchText]);
@@ -49,19 +50,9 @@ const Search = () => {
       return alert(`검색하실 내용을 2자 이상으로 검색해주세요.`);
     }
 
-    // 현재 url에서 search를 제외한 query가 없는 경우
-    if (Object.keys(router.query).length === 0 || ('search' in router.query && Object.keys(router.query).length === 1)) {
-      return router.push(`${router.pathname}?search=${searchText}`);
-    }
-
-    let currentUrl = router.pathname;
-    currentUrl += '?'
-    for (var key in router.query) {
-      currentUrl += `${key}=${router.query[key]}&`
-    }
-    currentUrl = currentUrl.slice(0, -1);
-    router.push(`${currentUrl}&search=${searchText}`);
-  }, [searchText]);
+    const newQeury = changeQuery(router, status, searchText, page);
+    router.push(`${router.pathname}${newQeury}`);
+  }, [searchText, router, status, search, page]);
 
   // 검색어에 의한 필터링 취소 요청 
   const resetHandler = useCallback(() => {
@@ -69,22 +60,11 @@ const Search = () => {
     setSearchText('');
 
     // 현재 검색어에 의한 필터링이 된 상태인 경우에만 reset 가능
-    // if (search) {
-    // 현재 url에서 search를 제외한 query가 없는 경우
-    if (Object.keys(router.query).length === 0 || ('search' in router.query && Object.keys(router.query).length === 1)) {
-      return router.push(`${router.pathname}`);
+    if (search) {
+      const newQeury = changeQuery(router, status, null, page);
+      router.push(`${router.pathname}${newQeury}`);
     }
-
-    let currentUrl = router.pathname;
-    currentUrl += '?'
-    for (var key in router.query) {
-      if (key === 'search') { continue; }
-      currentUrl += `${key}=${router.query[key]}&`
-    }
-    currentUrl = currentUrl.slice(0, -1);
-    router.push(`${currentUrl}`);
-    // }
-  }, [search]);
+  }, [router, status, search, page]);
 
   return (
     <form className={styles.container} onSubmit={searchHandler}>

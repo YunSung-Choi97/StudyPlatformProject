@@ -10,6 +10,7 @@ const initialState = {
 
   // posts 불러오기
   posts: null,
+  posts_length: null,
   loadPostsLoading: false,
   loadPostsErrorMessage: null,
 
@@ -44,7 +45,8 @@ const postSlice = createSlice({
       state.loadPostsLoading = true;
     })
     builder.addCase(loadPosts.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.posts_length = action.payload.posts_length;
       state.loadPostsLoading = false;
       state.loadPostsErrorMessage = null;
     })

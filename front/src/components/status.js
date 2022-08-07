@@ -2,20 +2,18 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
+import changeQuery from '../hooks/change_query';
 import styles from '../styles/status.module.css';
 
 const Status = () => {
-  const { status } = useSelector((state) => state.page);
+  const { status, search, page } = useSelector((state) => state.page);
   const router = useRouter();
 
   const sortStatuses = ['전체', '모집중', '모집완료'];
   const changeStatus = useCallback((sortStatus) => () => {
-    if (sortStatus === '전체') {
-      router.push(`${router.pathname}`);
-    } else {
-      router.push(`${router.pathname}?status=${sortStatus}`);
-    }
-  }, []);
+    const newQeury = sortStatus === '전체' ? changeQuery(router, null, search, page) : changeQuery(router, sortStatus, search, page);
+    router.push(`${router.pathname}${newQeury}`);
+  }, [router, search, page]);
 
   return (
     <ul className={styles.container}>
