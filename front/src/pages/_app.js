@@ -1,3 +1,4 @@
+import Footer from '../components/footer';
 import Header from '../components/header/header';
 import wrapper from '../redux/store';
 import '../styles/globals.css';
@@ -7,6 +8,7 @@ const App = ({ Component, pageProps }) => {
     <>
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 };

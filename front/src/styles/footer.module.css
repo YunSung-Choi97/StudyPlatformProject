@@ -1,0 +1,18 @@
+.container {
+  display: block;
+  height: 6rem;
+  align-items: center;
+  padding: 1rem;
+  font-size: 0.75rem;
+  margin-top: 3rem;
+  background-color: antiquewhite;
+}
+
+.info {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.info p {
+  margin: 0;
+}

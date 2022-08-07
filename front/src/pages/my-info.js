@@ -28,7 +28,17 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   }
   await store.dispatch(loadMyInfo());
 
-  // 2. 페이지 상태 설정
+  // 2. 로그인 하지 않은 사용자인 경우 home화면으로 이동
+  if (!store.getState().user.isLoggedIn) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  // 3. 페이지 상태 설정
   store.dispatch(setPage({
     name: 'my-info'
   }));

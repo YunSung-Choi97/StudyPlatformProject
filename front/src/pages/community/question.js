@@ -36,15 +36,21 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   store.dispatch(setPage({
     name: 'posts',
     category: 'community',
-    section: 'question'
+    section: 'question',
+    search: context.query.search ? context.query.search : null,
+    page: context.query.page ? Number(context.query.page) : null
   }));
 
   // 3. 데이터 불러오기
-  await store.dispatch(loadPosts({
-    category: 'community',
-    section: 'question',
-    status: null
-  }));
+  await store.dispatch(loadPosts(store.getState().page));
+  if (parseInt((store.getState().post.posts_length - 1) / 10) + 1 < store.getState().page.page) {
+    return {
+      redirect: {
+        destination: '/community',
+        permanent: false
+      }
+    }
+  }
 
   return {
     props: {},
