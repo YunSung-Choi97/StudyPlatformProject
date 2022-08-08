@@ -10,6 +10,7 @@ const db_option = require('./lib/database/option');
 const passportConfig = require('./lib/passport');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
+const postsRouter = require('./routes/posts');
 
 dotenv.config();
 const app = express();
@@ -41,6 +42,7 @@ app.use(passport.session());
 // router
 app.use('/user', userRouter);
 app.use('/post', postRouter);
+app.use('/posts', postsRouter);
 
 // 5000번 포트에서 서버 실행
 app.listen(5000, () => {

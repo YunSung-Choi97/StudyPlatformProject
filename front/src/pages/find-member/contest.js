@@ -5,7 +5,7 @@ import Main from '../../components/main';
 import Posts from '../../components/posts';
 import Seo from '../../components/seo';
 import Status from '../../components/status';
-import { loadPosts } from '../../redux/actions/post';
+import { loadPosts } from '../../redux/actions/posts';
 import { loadMyInfo } from '../../redux/actions/user';
 import { setPage } from '../../redux/reducers/page';
 import wrapper from '../../redux/store';

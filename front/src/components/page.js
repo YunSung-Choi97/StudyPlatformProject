@@ -7,23 +7,23 @@ import styles from '../styles/page.module.css';
 
 const Page = () => {
   const { status, search, page } = useSelector((state) => state.page);
-  const { posts_length } = useSelector((state) => state.post);
+  const { postsLength } = useSelector((state) => state.posts);
   const router = useRouter();
 
   // 나타날 page 변경 범위 생성
   const range = useCallback(() => {
     const array = [];
     if (page) {
-      for (var i = parseInt((page - 1) / 10) * 10 + 1; i <= parseInt((page - 1) / 10) * 10 + 10 && i <= parseInt((posts_length - 1) / 10) + 1; i++) {
+      for (var i = parseInt((page - 1) / 10) * 10 + 1; i <= parseInt((page - 1) / 10) * 10 + 10 && i <= parseInt((postsLength - 1) / 10) + 1; i++) {
         array.push(i);
       }
     } else {
-      for (var i = 1; i <= 10 && i <= parseInt((posts_length - 1) / 10) + 1; i++) {
+      for (var i = 1; i <= 10 && i <= parseInt((postsLength - 1) / 10) + 1; i++) {
         array.push(i);
       }
     }
     return array;
-  }, [page, posts_length]);
+  }, [page, postsLength]);
   const numbers = range();
 
   // 이전 page로 이동
@@ -53,22 +53,22 @@ const Page = () => {
 
   // 다음 pages로 이동
   const moveToNextPages = useCallback(() => {
-    if (parseInt((page - 1) / 10) * 10 + 11 <= parseInt((posts_length - 1) / 10) + 1) {
+    if (parseInt((page - 1) / 10) * 10 + 11 <= parseInt((postsLength - 1) / 10) + 1) {
       const newQuery = changeQuery(router, status, search, parseInt((page - 1) / 10) * 10 + 11);
       router.push(`${router.pathname}${newQuery}`);
     }
-  }, [router, status, search, page, posts_length]);
+  }, [router, status, search, page, postsLength]);
 
   // 다음 page로 이동
   const moveToNextPage = useCallback(() => {
-    if (page < parseInt((posts_length - 1) / 10) + 1) {
+    if (page < parseInt((postsLength - 1) / 10) + 1) {
       const newQuery = changeQuery(router, status, search, page + 1);
       router.push(`${router.pathname}${newQuery}`);
     } else {
       const newQuery = changeQuery(router, status, search, 2);
       router.push(`${router.pathname}${newQuery}`);
     }
-  }, [router, status, search, page, posts_length]);
+  }, [router, status, search, page, postsLength]);
 
   return (
     <nav className={styles.container}>

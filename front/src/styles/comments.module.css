@@ -1,0 +1,51 @@
+.container {
+  border-top: 1px solid var(--border-gray);
+  padding: 1.5rem 0;
+}
+
+.info {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.info>div {
+  font-size: 1.125rem;
+  margin-right: 1rem;
+}
+
+.new_comment {
+  margin: 1.5rem 0;
+}
+
+.new_comment>input {
+  width: calc(100% - 4rem);
+  margin-right: 1rem;
+  background-color: var(--bg-color);
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.new_comment>input:focus {
+  outline: none;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.comment {
+  margin: 1rem 0;
+}
+
+.comment_header {
+  display: flex;
+  align-items: center;
+  font-size: 0.9375rem;
+}
+
+.comment_header>div {
+  margin-right: 0.5rem;
+}

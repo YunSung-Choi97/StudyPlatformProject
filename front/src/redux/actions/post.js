@@ -14,15 +14,6 @@ export const loadPost = createAsyncThunk('post/loadPost', async (data, { rejectW
   }
 });
 
-export const loadPosts = createAsyncThunk('post/loadPosts', async (data, { rejectWithValue }) => {
-  try {
-    const response = await axios.post('/post/load-posts', data);
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(error.response.data);
-  }
-});
-
 export const newPost = createAsyncThunk('post/newPost', async (data, { rejectWithValue }) => {
   try {
     const response = await axios.post('/post/new-post', data);

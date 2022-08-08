@@ -7,7 +7,7 @@ import Page from './page';
 
 const Posts = () => {
   const { category } = useSelector((state) => state.page);
-  const { posts } = useSelector((state) => state.post);
+  const { posts } = useSelector((state) => state.posts);
 
   return (
     <>

@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import Main from '../components/main';
 import Seo from '../components/seo';
-import ToggleSwitch from '../components/toggle_switch';
 import { loadMyInfo } from '../redux/actions/user';
 import { setPage } from '../redux/reducers/page';
 import wrapper from '../redux/store';
