@@ -24,12 +24,13 @@ router.post('/load-post', (req, res) => {
           post: postData[0],
           comments: commentData,
           commentsLength: commentData.length,
+          log: `loadPostDone(${getNow()})`,
         });
       });
     });
   } catch (error) {
     console.error(error);
-    return res.status(500);
+    return res.status(500).send(`loadPostError(${getNow()})`);
   }
 });
 
@@ -54,13 +55,13 @@ router.post('/new-post', isLoggedIn, (req, res) => {
       if (error) { throw error; }
 
       return res.status(200).json({
-        message: '게시글이 새로 추가되었습니다.',
         id: InsertionResult.insertId,
+        log: `newPostDone(${getNow()})`,
       });
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).send('게시글 작성에 실패하였습니다.');
+    return res.status(500).send(`newPostError(${getNow()})`);
   }
 });
 

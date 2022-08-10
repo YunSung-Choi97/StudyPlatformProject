@@ -1,19 +1,26 @@
 .container {
   padding: 0;
   margin: 0;
-  border-top: 1px solid var(--border-gray);
+  border-top: 1px solid var(--gray-85);
 }
 
 .post {
-  border-bottom: 1px solid var(--border-gray);
+  display: flex;
+  border-bottom: 1px solid var(--gray-85);
   padding: 1rem;
 }
 
-.title {
-  margin: 1rem 0;
+.info {
+  margin-right: auto;
 }
 
-.body {
+.title {
+  font-size: 1.125rem;
+  margin: 0.5rem 0;
+}
+
+.content {
+  color: var(--gray-35);
   margin: 1rem 0;
   height: 3rem;
   line-height: 1.4;
@@ -21,6 +28,47 @@
   white-space: pre-wrap;
 }
 
-.info {
-  margin: 2rem 0 0.5rem 0;
+.sub_info {
+  color: var(--gray-55);
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+.additional_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 1.5rem;
+}
+
+.comment_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid var(--gray-80);
+  border-radius: 50%;
+  margin: 0.5rem;
+}
+
+.comment_number {
+  font-size: 1.125rem;
+}
+
+.comment_description {
+  font-size: 0.75rem;
+  color: var(--gray-55);
+}
+
+.like_info {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.like_number {
+  margin-left: 0.1rem;
 }

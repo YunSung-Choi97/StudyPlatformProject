@@ -6,9 +6,9 @@ import Search from './search';
 import styles from '../styles/functional_part.module.css';
 
 const FunctionalPart = () => {
+  const router = useRouter();
   const { category } = useSelector((state) => state.page);
   const { isLoggedIn } = useSelector((state) => state.user);
-  const router = useRouter();
 
   const writeHandler = useCallback(() => {
     if (isLoggedIn) {

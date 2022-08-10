@@ -8,6 +8,23 @@ const getNow = require('../lib/get_now');
 
 const router = express.Router();
 
+// 내 정보 불러오기
+router.get('/load-my-info', (req, res) => {
+  if (req.user) {
+    return res.status(200).json({
+      isLoggedIn: true,
+      myInfo: req.user,
+      log: `LoadMyInfoDone(${getNow()})`,
+    });
+  } else {
+    return res.status(401).json({
+      isLoggedIn: false,
+      myInfo: null,
+      log: `LoadMyInfoError(${getNow()})`,
+    });
+  }
+});
+
 // 로그인
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (serverError, userData, clientError) => {
@@ -25,7 +42,10 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         console.error(loginError);
         return next(loginError);
       }
-      return res.status(200).json(userData);
+      return res.status(200).json({
+        myInfo: userData,
+        log: `loginDone(${getNow()})`,
+      });
     });
   })(req, res, next);
 });
@@ -42,15 +62,15 @@ router.post('/logout', isLoggedIn, (req, res) => {
       if (error) { throw error; }
       req.session.destroy((error) => {
         if (error) { throw error; }
-        return res.status(200).send('로그아웃 성공');
+        return res.status(200).send(`logoutDone(${getNow()})`);
       });
     });
   } catch (error) {
     console.error(error);
     if (error.name === 'userInfoMismatch') {
-      return res.status(401).send('로그인 정보가 불일치합니다.');
+      return res.status(401).send(`logoutError(${getNow()})`);
     }
-    return res.status(500).send('로그아웃 실패');
+    return res.status(500).send(`logoutError(${getNow()})`);
   }
 });
 
@@ -66,13 +86,19 @@ router.post('/signup', isNotLoggedIn, (req, res) => {
         const now = getNow();
         db.query(sql, [req.body.inputId, hashedPassword, now, now], (error, InsertionResult) => {
           if (error) { throw error; }
-          return res.status(200).send('회원가입 성공');
+          return res.status(200).json({
+            log: `signupDone(${getNow()})`,
+            message: `${req.body.inputNickname}님 환영합니다.`,
+          });
         });
       });
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).send('error');
+    return res.status(500).json({
+      log: `signupError(${getNow()})`,
+      message: '회원가입에 실패했습니다. 다시 시도해주세요.',
+    });
   }
 });
 
@@ -109,22 +135,6 @@ router.post('/verify-nickname', isNotLoggedIn, (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).send('error');
-  }
-});
-
-
-// 내 정보 불러오기
-router.get('/load-my-info', (req, res) => {
-  if (req.user) {
-    return res.status(200).json({
-      isLoggedIn: true,
-      myInfo: req.user
-    });
-  } else {
-    return res.status(200).json({
-      isLoggedIn: false,
-      myInfo: null
-    });
   }
 });
 

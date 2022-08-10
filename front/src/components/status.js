@@ -1,13 +1,13 @@
+import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
 
 import changeQuery from '../hooks/change_query';
 import styles from '../styles/status.module.css';
 
 const Status = () => {
-  const { status, search, page } = useSelector((state) => state.page);
   const router = useRouter();
+  const { status, search, page } = useSelector((state) => state.page);
 
   const sortStatuses = ['전체', '모집중', '모집완료'];
   const changeStatus = useCallback((sortStatus) => () => {

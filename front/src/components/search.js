@@ -8,8 +8,8 @@ import searchIcon from '../images/search_icon.png';
 import styles from '../styles/search.module.css';
 
 const Search = () => {
-  const { category, section, status, search, page } = useSelector((state) => state.page);
   const router = useRouter();
+  const { category, section, status, search, page } = useSelector((state) => state.page);
 
   // 검색어
   const [searchText, setSearchText] = useState(search ? search : '');

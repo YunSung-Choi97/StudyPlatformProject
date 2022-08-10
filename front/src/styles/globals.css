@@ -30,9 +30,30 @@ button {
 :root {
   --dcw-color: #63A9FF;
   --font-color: #021d49;
-  --bg-color: rgb(248, 248, 248);
-  --bg-gray: #c1cbd8;
-  --font-gray: #A0A0A0;
-  --font-gray-hover: #828282;
-  --border-gray: #dee2e6;
+  --bg-color: #F7F7F7;
+
+  --bg-footer: #FAEBD7;
+
+  /* gray
+  85: 구분선
+  80, 75: 테두리
+  65, 60, 55, 50: 글씨
+  */
+  --gray-85: #D9D9D9;
+  --gray-80: #CCCCCC;
+  --gray-75: #BFBFBF;
+  --gray-70: #B3B3B3;
+  --gray-65: #A6A6A6;
+  --gray-60: #999999;
+  --gray-55: #8C8C8C;
+  --gray-50: #808080;
+  --gray-45: #737373;
+  --gray-40: #666666;
+  --gray-35: #595959;
+  --gray-30: #4D4D4D;
+  --gray-25: #404040;
+  --gray-20: #333333;
+  --gray-15: #262626;
+  /* 
+  */
 }

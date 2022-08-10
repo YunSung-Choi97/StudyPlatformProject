@@ -11,9 +11,9 @@ import wrapper from '../redux/store';
 import styles from '../styles/login.module.css';
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const { isLoggedIn, loginErrorMessage } = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { loginDone, loginError } = useSelector((state) => state.user);
 
   // 로그인 요청
   const login_handler = useCallback((event) => {
@@ -26,17 +26,17 @@ const Login = () => {
 
   // 로그인 성공
   useEffect(() => {
-    if (isLoggedIn) {
+    if (loginDone) {
       router.replace('/');
     }
-  }, [isLoggedIn]);
+  }, [loginDone]);
 
   // 로그인 실패
   useEffect(() => {
-    if (loginErrorMessage) {
-      alert(loginErrorMessage);
+    if (loginError) {
+      alert(loginError);
     }
-  }, [loginErrorMessage]);
+  }, [loginError]);
 
   return (
     <>

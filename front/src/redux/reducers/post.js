@@ -8,12 +8,13 @@ const initialState = {
   comments: null,
   commentsLength: null,
   loadPostLoading: false,
-  loadPostErrorMessage: null,
+  loadPostDone: null,
+  loadPostError: null,
 
   // 새로운 게시글 작성하기
   newPostLoading: false,
   newPostDone: null,
-  newPostErrorMessage: null,
+  newPostError: null,
 };
 
 const postSlice = createSlice({
@@ -26,33 +27,33 @@ const postSlice = createSlice({
     // post 불러오기
     builder.addCase(loadPost.pending, (state) => {
       state.loadPostLoading = true;
+      state.loadPostDone = null;
+      state.loadPostError = null;
     })
     builder.addCase(loadPost.fulfilled, (state, action) => {
       state.post = action.payload.post;
       state.comments = action.payload.comments;
       state.commentsLength = action.payload.commentsLength;
       state.loadPostLoading = false;
-      state.loadPostErrorMessage = null;
+      state.loadPostDone = action.payload.log;
     })
     builder.addCase(loadPost.rejected, (state, action) => {
-      state.post = null;
-      state.comments = null;
       state.loadPostLoading = false;
-      state.loadPostErrorMessage = action.payload;
+      state.loadPostError = action.payload;
     })
     // 새로운 게시글 작성하기
     builder.addCase(newPost.pending, (state) => {
       state.newPostLoading = true;
+      state.newPostDone = null;
+      state.newPostError = null;
     })
     builder.addCase(newPost.fulfilled, (state, action) => {
       state.newPostLoading = false;
       state.newPostDone = action.payload;
-      state.newPostErrorMessage = null;
     })
     builder.addCase(newPost.rejected, (state, action) => {
       state.newPostLoading = false;
-      state.newPostDone = null;
-      state.newPostErrorMessage = action.payload;
+      state.newPostError = action.payload;
     })
   }
 });

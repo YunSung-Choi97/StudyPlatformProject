@@ -8,14 +8,13 @@ import Seo from '../components/seo';
 import useInput from '../hooks/use_input';
 import { loadMyInfo, signup } from '../redux/actions/user';
 import { setPage } from '../redux/reducers/page';
-import { signupEnd } from '../redux/reducers/user';
 import wrapper from '../redux/store';
 import styles from '../styles/signup.module.css';
 
 const Signup = () => {
-  const dispatch = useDispatch();
-  const { signupDone, signupErrorMessage } = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { signupDone, signupError } = useSelector((state) => state.user);
 
   // 회원가입에 필요한 입력 정보 (id, password, name, nickname)
   const [inputId, changeInputId] = useInput('');
@@ -85,15 +84,14 @@ const Signup = () => {
   useEffect(() => {
     // 회원가입 성공
     if (signupDone) {
-      alert(signupDone);
+      alert(signupDone.message);
       router.replace('/login');
     }
     // 회원가입 실패
-    if (signupErrorMessage) {
-      alert(signupErrorMessage);
+    if (signupError) {
+      alert(signupError.message);
     }
-    dispatch(signupEnd());
-  }, [signupDone, signupErrorMessage]);
+  }, [signupDone, signupError]);
 
   return (
     <>

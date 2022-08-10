@@ -56,12 +56,13 @@ router.post('/load-posts', (req, res) => {
         return res.status(200).json({
           posts: postsData,
           posts_length: postCountData[0].length,
+          log: `loadPostsDone(${getNow()})`,
         });
       });
     })
   } catch (error) {
     console.error(error);
-    return res.status(500);
+    return res.status(500).send(`loadPostsError(${getNow()})`);
   }
 });
 

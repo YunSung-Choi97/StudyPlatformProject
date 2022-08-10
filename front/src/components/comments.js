@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import useInput from '../hooks/use_input';
 
+import useInput from '../hooks/use_input';
 import styles from '../styles/comments.module.css';
 
 const Comments = () => {

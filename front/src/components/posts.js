@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 
+import heartIcon from '../images/like3.svg';
 import styles from '../styles/posts.module.css';
 import Page from './page';
 
@@ -18,9 +20,21 @@ const Posts = () => {
               <Link href={`/${category}/${post.post_id}`}>
                 <a>
                   <li className={styles.post}>
-                    <h3 className={styles.title}>{post.post_title} // debug {post.post_id} {post.post_category} {post.post_section} {post.post_status}</h3>
-                    <p className={styles.body}>{post.post_content}</p>
-                    <div className={styles.info}>{post.post_writer_id} · {post.post_created_date} · 조회수 {post.post_views} · 좋아요 {post.post_like_number}</div>
+                    <div className={styles.info}>
+                      <h3 className={styles.title}>{post.post_title}</h3>
+                      <p className={styles.content}>{post.post_content}</p>
+                      <div className={styles.sub_info}>{post.post_writer_id} · {post.post_created_date}</div>
+                    </div>
+                    <div className={styles.additional_info}>
+                      <div className={styles.comment_info}>
+                        <div className={styles.comment_number}>3</div>
+                        <div className={styles.comment_description}>댓글</div>
+                      </div>
+                      <div className={styles.like_info}>
+                        <Image src={heartIcon} alt='heart icon' width={16} height={16} />
+                        <div className={styles.like_number}>{post.post_like_number}</div>
+                      </div>
+                    </div>
                   </li>
                 </a>
               </Link>

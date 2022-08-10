@@ -13,8 +13,7 @@ import viewIcon3 from '../images/view_icon3.svg';
 import styles from '../styles/post.module.css';
 
 const Post = () => {
-  const { post, comments, commentsLength } = useSelector((state) => state.post);
-  const { isLoggedIn, myInfo } = useSelector((state) => state.user);
+  const { post } = useSelector((state) => state.post);
 
   return (
     <>

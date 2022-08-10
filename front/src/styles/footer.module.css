@@ -5,7 +5,7 @@
   padding: 1rem;
   font-size: 0.75rem;
   margin-top: 3rem;
-  background-color: antiquewhite;
+  background-color: var(--bg-footer);
 }
 
 .info {

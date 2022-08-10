@@ -1,7 +1,7 @@
 .header {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--gray-85);
   margin-bottom: 2.5rem;
   padding-bottom: 1rem;
 }
@@ -19,7 +19,7 @@
 
 .info>div {
   margin: auto 0.75rem auto 0;
-  color: var(--font-gray);
+  color: var(--gray-50);
 }
 
 .content {

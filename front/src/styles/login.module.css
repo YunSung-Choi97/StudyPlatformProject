@@ -4,7 +4,7 @@
   text-align: center;
   padding: 1rem;
   margin: auto;
-  border: 1px solid var(--border-gray);
+  border: 1px solid var(--gray-80);
   border-radius: 15px;
   width: 400px;
 }
@@ -17,13 +17,13 @@
 }
 
 .id_box {
-  border: 1px solid var(--border-gray);
+  border: 1px solid var(--gray-80);
   border-radius: 4px 4px 0 0;
   width: 100%;
 }
 
 .pwd_box {
-  border: 1px solid var(--border-gray);
+  border: 1px solid var(--gray-80);
   border-radius: 0 0 4px 4px;
   width: 100%;
 }

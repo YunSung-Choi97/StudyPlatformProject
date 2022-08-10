@@ -6,9 +6,9 @@ import changeQuery from '../hooks/change_query';
 import styles from '../styles/page.module.css';
 
 const Page = () => {
+  const router = useRouter();
   const { status, search, page } = useSelector((state) => state.page);
   const { postsLength } = useSelector((state) => state.posts);
-  const router = useRouter();
 
   // 나타날 page 변경 범위 생성
   const range = useCallback(() => {

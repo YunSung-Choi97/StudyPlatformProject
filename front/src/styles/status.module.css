@@ -5,7 +5,7 @@
 }
 
 .container button {
-  color: var(--font-gray);
+  color: var(--gray-65);
   background-color: var(--bg-color);
   border: unset;
   font-size: 1rem;
@@ -15,7 +15,7 @@
 }
 
 .container button:hover {
-  color: var(--font-gray-hover);
+  color: var(--gray-50);
 }
 
 .container button.active {

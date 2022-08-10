@@ -7,7 +7,8 @@ const initialState = {
   posts: null,
   postsLength: null,
   loadPostsLoading: false,
-  loadPostsErrorMessage: null,
+  loadPostsDone: null,
+  loadPostsError: null,
 };
 
 const postsSlice = createSlice({
@@ -20,18 +21,18 @@ const postsSlice = createSlice({
     // posts 불러오기
     builder.addCase(loadPosts.pending, (state) => {
       state.loadPostsLoading = true;
+      state.loadPostsDone = null;
+      state.loadPostsError = null;
     })
     builder.addCase(loadPosts.fulfilled, (state, action) => {
       state.posts = action.payload.posts;
       state.postsLength = action.payload.posts_length;
       state.loadPostsLoading = false;
-      state.loadPostsErrorMessage = null;
+      state.loadPostsDone = action.payload.log;
     })
     builder.addCase(loadPosts.rejected, (state, action) => {
-      state.posts = null;
-      state.postsLength = null;
       state.loadPostsLoading = false;
-      state.loadPostsErrorMessage = action.payload;
+      state.loadPostsError = action.payload;
     })
   }
 });

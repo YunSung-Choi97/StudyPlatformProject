@@ -6,9 +6,9 @@ import { logout } from '../../redux/actions/user';
 import styles from '../../styles/header.module.css';
 
 const User = () => {
-  const { isLoggedIn, myInfo } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { isLoggedIn, myInfo } = useSelector((state) => state.user);
 
   const moveLoginPage = useCallback(() => {
     router.push('/login');
