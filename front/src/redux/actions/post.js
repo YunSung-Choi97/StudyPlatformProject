@@ -14,6 +14,24 @@ export const loadPost = createAsyncThunk('post/loadPost', async (data, { rejectW
   }
 });
 
+export const startLiking = createAsyncThunk('post/startLiking', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/post/start-liking', data);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const terminateLiking = createAsyncThunk('post/terminateLiking', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/post/terminate-liking', data);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
 export const newPost = createAsyncThunk('post/newPost', async (data, { rejectWithValue }) => {
   try {
     const response = await axios.post('/post/new-post', data);

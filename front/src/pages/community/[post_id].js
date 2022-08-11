@@ -37,7 +37,10 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
   }));
 
   // 3. 데이터 불러오기
-  await store.dispatch(loadPost({ id: context.params.post_id }));
+  await store.dispatch(loadPost({
+    post_id: context.params.post_id,
+    user_id: store.getState().user.isLoggedIn ? store.getState().user.myInfo.id : null,
+  }));
 
   return {
     props: {},

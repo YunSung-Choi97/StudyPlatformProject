@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 
-import heartIcon from '../images/like3.svg';
+import grayHeartIcon from '../images/gray_heart.svg';
 import styles from '../styles/posts.module.css';
 import Page from './page';
 
@@ -27,11 +27,11 @@ const Posts = () => {
                     </div>
                     <div className={styles.additional_info}>
                       <div className={styles.comment_info}>
-                        <div className={styles.comment_number}>3</div>
+                        <div className={styles.comment_number}>{post.post_comment_number}</div>
                         <div className={styles.comment_description}>댓글</div>
                       </div>
                       <div className={styles.like_info}>
-                        <Image src={heartIcon} alt='heart icon' width={16} height={16} />
+                        <Image src={grayHeartIcon} alt='gray heart icon' width={16} height={16} />
                         <div className={styles.like_number}>{post.post_like_number}</div>
                       </div>
                     </div>
