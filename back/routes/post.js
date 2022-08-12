@@ -14,16 +14,32 @@ router.post('/load-post', (req, res) => {
 
     // 게시글 정보 불러오기
     let sql =
-      `SELECT post.post_id, post_writer_id, post_title, post_created_date, post_content, COUNT(post_like.post_id) AS post_like_number
-        FROM post
+      `SELECT post.*, COUNT(post_like.post_id) AS post_like_number
+        FROM (SELECT post_id, post_writer_id, user_nickname AS post_writer_nickname, post_title, post_created_date, post_content
+          FROM post 
+          LEFT JOIN public_userdata ON post_writer_id = user_id
+          WHERE post.post_id = ?) AS post
         LEFT JOIN post_like ON post.post_id = post_like.post_id
-        WHERE post.post_id = ?
         GROUP BY post.post_id;`;
     db.query(sql, postId, (error, postData) => {
       if (error) { throw error; }
 
+      // 요청된 post_id의 게시글이 존재하지 않는 경우
+      if (postData.length === 0) {
+        return res.status(200).json({
+          post: null,
+          comments: null,
+          commentsLength: null,
+          liking: null,
+          log: `loadPostDone(${getNow()})`,
+        });
+      }
       // 댓글 정보 불러오기
-      sql = `SELECT * FROM comment WHERE post_id = ?;`;
+      sql =
+        `SELECT comment_id, comment_writer_id, user_nickname AS comment_writer_nickname, comment_created_date, comment_content
+          FROM comment
+          LEFT JOIN public_userdata ON comment_writer_id = user_id
+          WHERE post_id = ?;`;
       db.query(sql, postId, (error, commentData) => {
         if (error) { throw error; }
 
@@ -88,10 +104,14 @@ router.post('/terminate-liking', isLoggedIn, (req, res) => {
   }
 });
 
-// 새로운 게시글 추가
-router.post('/new-post', isLoggedIn, (req, res) => {
+// 게시글 작성하기
+router.post('/add-post', isLoggedIn, (req, res) => {
   try {
-    const sql = `INSERT INTO post (post_writer_id, post_title, post_category, post_section, post_status, post_created_date, post_content, post_views, post_like_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    const sql =
+      `INSERT INTO post
+        (post_writer_id, post_title, post_category, post_section, post_status, post_created_date, post_content, post_views)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
+
     const values = [req.body.id, req.body.title, req.body.category];
     if (req.body.section !== '선택') {
       values.push(req.body.section);
@@ -103,19 +123,95 @@ router.post('/new-post', isLoggedIn, (req, res) => {
     } else {
       values.push(null);
     }
-    values.push(getNow(), req.body.content, 0, 0);
+    values.push(getNow(), req.body.content, 0);
 
     db.query(sql, values, (error, InsertionResult) => {
       if (error) { throw error; }
 
       return res.status(200).json({
         id: InsertionResult.insertId,
-        log: `newPostDone(${getNow()})`,
+        log: `addPostDone(${getNow()})`,
       });
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).send(`newPostError(${getNow()})`);
+    return res.status(500).send(`addPostError(${getNow()})`);
+  }
+});
+
+// 게시글 삭제하기
+router.post('/delete-post', isLoggedIn, (req, res) => {
+  try {
+    const sql = `DELETE FROM post WHERE post_id = ?;`;
+    db.query(sql, req.body.post_id, (error, deletionResult) => {
+      if (error) { throw error; }
+
+      return res.status(200).send(`deletePostDone(${getNow()})`);
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(`deletePostError(${getNow()})`);
+  }
+});
+
+// 댓글 작성하기
+router.post('/add-comment', isLoggedIn, (req, res) => {
+  try {
+    let sql =
+      `INSERT INTO comment
+        (post_id, comment_writer_id, comment_created_date, comment_content)
+        VALUES (?, ?, ?, ?);`;
+    const values = [req.body.post_id, req.body.comment_writer_id, getNow(), req.body.comment_content];
+
+    db.query(sql, values, (error, InsertionResult) => {
+      if (error) { throw error; }
+
+      sql =
+        `SELECT comment_id, comment_writer_id, user_nickname AS comment_writer_nickname, comment_created_date, comment_content
+          FROM comment
+          LEFT JOIN public_userdata ON comment_writer_id = user_id
+          WHERE post_id = ?;`;
+      db.query(sql, req.body.post_id, (error, commentsData) => {
+        if (error) { throw error; }
+
+        return res.status(200).json({
+          comments: commentsData,
+          commentsLength: commentsData.length,
+          log: `addCommentDone(${getNow()})`,
+        });
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(`addCommentError(${getNow()})`);
+  }
+});
+
+// 댓글 삭제하기
+router.post('/delete-comment', isLoggedIn, (req, res) => {
+  try {
+    let sql = `DELETE FROM comment WHERE comment_id = ?;`;
+    db.query(sql, req.body.comment_id, (error, deletionResult) => {
+      if (error) { throw error; }
+
+      sql =
+        `SELECT comment_id, comment_writer_id, user_nickname AS comment_writer_nickname, comment_created_date, comment_content
+          FROM comment
+          LEFT JOIN public_userdata ON comment_writer_id = user_id
+          WHERE post_id = ?;`;
+      db.query(sql, req.body.post_id, (error, commentsData) => {
+        if (error) { throw error; }
+
+        return res.status(200).json({
+          comments: commentsData,
+          commentsLength: commentsData.length,
+          log: `deleteCommentDone(${getNow()})`,
+        });
+      });
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send(`deleteCommentError(${getNow()})`);
   }
 });
 

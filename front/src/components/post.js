@@ -1,90 +1,65 @@
-import Image from 'next/image';
-import { useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import pinkHeartIcon from '../images/pink_heart.svg';
-import whiteHeartIcon from '../images/white_heart.svg';
-import { startLiking, terminateLiking } from '../redux/actions/post';
+import { deletePost } from '../redux/actions/post';
 import styles from '../styles/post.module.css';
 import Comments from './comments';
+import Liking from './liking';
 
 const Post = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const { post, liking, startLikingLoading, terminateLikingLoading } = useSelector((state) => state.post);
+  const { category } = useSelector((state) => state.page);
+  const { post, deletePostLoading, deletePostDone, deletePostError, } = useSelector((state) => state.post);
   const { isLoggedIn, myInfo } = useSelector((state) => state.user);
 
-  // 게시글 좋아요 요청
-  const startLikingHandler = useCallback(() => {
-    dispatch(startLiking({
-      postId: post.post_id,
-      userId: myInfo.id,
-    }));
-  }, []);
+  // 게시글 삭제하기 요청
+  const deletePostHandler = useCallback(() => {
+    dispatch(deletePost({ post_id: post.post_id }));
+  }, [post]);
 
-  // 게시글 좋아요 취소 요청
-  const terminateLikingHandler = useCallback(() => {
-    dispatch(terminateLiking({
-      postId: post.post_id,
-      userId: myInfo.id,
-    }));
-  }, []);
+  // 게시글 삭제하기 요청 성공
+  useEffect(() => {
+    if (deletePostDone) {
+      router.replace(`/${category}`);
+    }
+  }, [deletePostDone]);
 
-  // 게시글 좋아요 요청 불가 안내
-  const notifyLoginHandler = useCallback(() => {
-    alert('로그인이 필요한 기능입니다.');
-  }, []);
+  // 게시글 삭제하기 요청 실패
+  useEffect(() => {
+    if (deletePostError) {
+      alert('게시글 삭제에 실패하였습니다.\n다시 시도해주세요.');
+    }
+  }, [deletePostError]);
 
   return (
     <>
-      {post
-        ?
+      {post &&
         <>
           <div className={styles.header}>
             <h1>{post.post_title}</h1>
             <div className={styles.info}>
-              <div>{post.post_writer_id}</div>
+              <div>{post.post_writer_nickname}</div>
               <div>{post.post_created_date}</div>
+              {(isLoggedIn && post.post_writer_id === myInfo.id) &&
+                <div>
+                  {deletePostLoading
+                    ? <button className={styles.controler}>삭제</button>
+                    : <button className={styles.controler} onClick={deletePostHandler}>삭제</button>
+                  }
+                </div>
+              }
             </div>
           </div>
           <div className={styles.content}>
             <p>{post.post_content}</p>
           </div>
           <div className={styles.footer}>
-            {
-              isLoggedIn
-                ? liking
-                  ? terminateLikingLoading
-                    ?
-                    <button className={styles.like_button}>
-                      <div className={styles.heart_icon}><Image src={pinkHeartIcon} alt='pink heart icon' width={18} height={18} /></div>
-                      <div className={styles.heart_description}>{post.post_like_number}</div>
-                    </button>
-                    :
-                    <button className={styles.like_button} onClick={terminateLikingHandler}>
-                      <div className={styles.heart_icon}><Image src={pinkHeartIcon} alt='pink heart icon' width={18} height={18} /></div>
-                      <div className={styles.heart_description}>{post.post_like_number}</div>
-                    </button>
-                  : startLikingLoading
-                    ?
-                    <button className={styles.like_button}>
-                      <div className={styles.heart_icon}><Image src={whiteHeartIcon} alt='white heart icon' width={18} height={18} /></div>
-                      <div className={styles.heart_description}>{post.post_like_number}</div>
-                    </button>
-                    :
-                    <button className={styles.like_button} onClick={startLikingHandler}>
-                      <div className={styles.heart_icon}><Image src={whiteHeartIcon} alt='white heart icon' width={18} height={18} /></div>
-                      <div className={styles.heart_description}>{post.post_like_number}</div>
-                    </button>
-                :
-                <button className={styles.like_button} onClick={notifyLoginHandler}>
-                  <div className={styles.heart_icon}><Image src={whiteHeartIcon} alt='white heart icon' width={18} height={18} /></div>
-                  <div className={styles.heart_description}>{post.post_like_number}</div>
-                </button>
-            }
+            <Liking />
           </div>
           <Comments />
         </>
-        : <p>삭제되었거나 존재하지 않는 글입니다.</p>
       }
     </>
   );

@@ -32,9 +32,36 @@ export const terminateLiking = createAsyncThunk('post/terminateLiking', async (d
   }
 });
 
-export const newPost = createAsyncThunk('post/newPost', async (data, { rejectWithValue }) => {
+export const addPost = createAsyncThunk('post/addPost', async (data, { rejectWithValue }) => {
   try {
-    const response = await axios.post('/post/new-post', data);
+    const response = await axios.post('/post/add-post', data);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const deletePost = createAsyncThunk('post/deletePost', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/post/delete-post', data);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const addComment = createAsyncThunk('post/addComment', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/post/add-comment', data);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const deleteComment = createAsyncThunk('post/deleteComment', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/post/delete-comment', data);
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data);

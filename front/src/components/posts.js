@@ -23,7 +23,7 @@ const Posts = () => {
                     <div className={styles.info}>
                       <h3 className={styles.title}>{post.post_title}</h3>
                       <p className={styles.content}>{post.post_content}</p>
-                      <div className={styles.sub_info}>{post.post_writer_id} · {post.post_created_date}</div>
+                      <div className={styles.sub_info}>{post.post_writer_nickname} · {post.post_created_date}</div>
                     </div>
                     <div className={styles.additional_info}>
                       <div className={styles.comment_info}>

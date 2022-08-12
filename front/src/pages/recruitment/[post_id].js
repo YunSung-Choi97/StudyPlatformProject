@@ -33,7 +33,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
 
   // 2. 페이지 상태 설정
   store.dispatch(setPage({
-    name: 'post'
+    name: 'post',
+    category: 'recruitment',
   }));
 
   // 3. 데이터 불러오기
@@ -41,6 +42,14 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     post_id: context.params.post_id,
     user_id: store.getState().user.isLoggedIn ? store.getState().user.myInfo.id : null,
   }));
+  if (store.getState().post.post === null) {
+    return {
+      redirect: {
+        destination: '/community',
+        permanent: false
+      }
+    }
+  }
 
   return {
     props: {},

@@ -34,13 +34,15 @@ router.post('/load-posts', (req, res) => {
 
     // SQL 완성
     const sqlForPosts =
-      `SELECT post.post_id, post_writer_id, post_title, post_created_date, post_content, post_comment_number, COUNT(post_like.post_id) AS post_like_number
-        FROM (SELECT post.post_id, post_writer_id, post_title, post_created_date, post_content, COUNT(comment.post_id) AS post_comment_number
-          FROM post
+      `SELECT post.*, COUNT(post_like.post_id) AS post_like_number
+        FROM (SELECT post.*, COUNT(comment.post_id) AS post_comment_number
+          FROM (SELECT post_id, post_writer_id, user_nickname AS post_writer_nickname, post_title, post_created_date, post_content
+            FROM post
+            LEFT JOIN public_userdata ON post_writer_id = user_id
+            ${whereClause}
+            ${orderByClause}) AS post
           LEFT JOIN comment ON post.post_id = comment.post_id
-          ${whereClause}
-          GROUP BY post.post_id
-          ${orderByClause}) AS post
+          GROUP BY post.post_id) AS post
         LEFT JOIN post_like ON post.post_id = post_like.post_id
         GROUP BY post.post_id;`;
     const sqlForLength =

@@ -5,20 +5,21 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Main from '../components/main';
 import Seo from '../components/seo';
+import changeToKorean from '../hooks/change_to_korean';
 import useInput from '../hooks/use_input';
 import useSelect from '../hooks/use_select';
-import { newPost } from '../redux/actions/post';
+import { addPost } from '../redux/actions/post';
 import { loadMyInfo } from '../redux/actions/user';
 import { setPage } from '../redux/reducers/page';
 import wrapper from '../redux/store';
 import styles from '../styles/write.module.css';
 
 const Write = () => {
-  const { newPostDone, newPostErrorMessage } = useSelector((state) => state.post);
-  const { category } = useSelector((state) => state.page);
-  const { myInfo } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { category } = useSelector((state) => state.page);
+  const { addPostDone, addPostError } = useSelector((state) => state.post);
+  const { myInfo } = useSelector((state) => state.user);
 
   // 글 작성에 필요한 입력 정보 (title, category, section, content)
   const [inputTitle, changeTitle] = useInput('');
@@ -30,10 +31,7 @@ const Write = () => {
   const categories = ['커뮤니티', '팀원 찾기', '후기/평점', '채용정보'];
   useEffect(() => {
     if (category) {
-      if (category === 'community') { setCategory('커뮤니티'); }
-      else if (category === 'find-member') { setCategory('팀원 찾기'); }
-      else if (category === 'review') { setCategory('후기/평점'); }
-      else if (category === 'recruitment') { setCategory('채용정보'); }
+      setCategory(changeToKorean(category));
     } else {
       setCategory('커뮤니티');
     }
@@ -49,45 +47,42 @@ const Write = () => {
     } else setSections(['선택']);
   }, [inputCategory]);
 
-  // 뒤로가기
+  // 이전 페이지로 이동
   const backHandler = useCallback(() => {
     if (confirm('작성된 모든 내용은 저장되지 않습니다.\n이전 페이지로 이동하시겠습니까?')) {
       router.back();
     }
   }, []);
 
-  // 작성한 게시글 제출
+  // 게시글 작성하기 요청
   const submitHandler = useCallback((event) => {
     event.preventDefault();
     if ((inputCategory === '커뮤니티' && inputSection === '선택') || (inputCategory === '팀원 찾기' && inputSection === '선택')) {
       return alert('게시글의 세부분류를 선택해주세요.');
     }
-    const post_data = {
+
+    dispatch(addPost({
       id: myInfo.id,
       title: inputTitle,
       category: inputCategory,
       section: inputSection,
       content: inputContent,
-    };
-    dispatch(newPost(post_data));
+    }));
   }, [inputTitle, inputCategory, inputSection, inputContent]);
 
-  // 게시글 작성 성공
+  // 게시글 작성하기 요청 성공
   useEffect(() => {
-    if (newPostDone) {
-      if (inputCategory === '커뮤니티') { router.replace(`/community/${newPostDone.id}`); }
-      else if (inputCategory === '팀원 찾기') { router.replace(`/find-member/${newPostDone.id}`); }
-      else if (inputCategory === '후기/평점') { router.replace(`/review/${newPostDone.id}`); }
-      else if (inputCategory === '채용정보') { router.replace(`/recruitment/${newPostDone.id}`); }
+    if (addPostDone) {
+      router.replace(`/${changeToKorean(inputCategory)}/${addPostDone.id}`);
     }
-  }, [newPostDone]);
+  }, [addPostDone]);
 
-  // 게시글 작성 실패
+  // 게시글 작성하기 요청 실패
   useEffect(() => {
-    if (newPostDone) {
-      alert(newPostErrorMessage);
+    if (addPostDone) {
+      alert(addPostError);
     }
-  }, [newPostErrorMessage]);
+  }, [addPostError]);
 
   return (
     <>
