@@ -1,21 +1,18 @@
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import getDisplayTime from '../hooks/get_display_time';
+import useInput from '../hooks/use_input';
 import { addComment, deleteComment } from '../redux/actions/post';
 import styles from '../styles/comments.module.css';
 
 const Comments = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const { post, comments, commentsLength, addCommentLoading, addCommentDone, addCommentError, deleteCommentLoading, deleteCommentError } = useSelector((state) => state.post);
   const { isLoggedIn, myInfo } = useSelector((state) => state.user);
 
-  // 새로운 댓글 내용
-  const [inputComment, setInputComment] = useState('');
-  const changeComment = useCallback((event) => {
-    setInputComment(event.target.value);
-  }, []);
+  // 작성할 댓글 내용
+  const [inputComment, changeInputComment, setInputComment] = useInput('');
 
   // 댓글 작성하기 요청
   const addCommentHandler = useCallback(() => {
@@ -73,7 +70,7 @@ const Comments = () => {
         <form className={styles.new_comment}>
           <div className={styles.writer_info}>{myInfo.nickname}</div>
           <div className={styles.content_box}>
-            <input type='text' value={inputComment} onChange={changeComment} placeholder='댓글 추가...' />
+            <input type='text' value={inputComment} onChange={changeInputComment} placeholder='댓글 추가...' />
             {
               inputComment === ''
                 ? <button type='submit' disabled>댓글</button>
@@ -91,7 +88,7 @@ const Comments = () => {
               <li key={comment.comment_id} className={styles.comment}>
                 <div className={styles.comment_info}>
                   <div>{comment.comment_writer_nickname}</div>
-                  <div className={styles.date_view}>{comment.comment_created_date}</div>
+                  <div className={styles.date_view}>{getDisplayTime(comment.comment_created_date)}</div>
                   {(isLoggedIn && comment.comment_writer_id === myInfo.id) && (
                     deleteCommentLoading
                       ? <button className={styles.controler}>삭제</button>

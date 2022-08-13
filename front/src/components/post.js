@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import getDisplayTime from '../hooks/get_display_time';
 import { deletePost } from '../redux/actions/post';
 import styles from '../styles/post.module.css';
 import Comments from './comments';
@@ -41,7 +42,7 @@ const Post = () => {
             <h1>{post.post_title}</h1>
             <div className={styles.info}>
               <div>{post.post_writer_nickname}</div>
-              <div>{post.post_created_date}</div>
+              <div>{getDisplayTime(post.post_created_date)}</div>
               {(isLoggedIn && post.post_writer_id === myInfo.id) &&
                 <div>
                   {deletePostLoading

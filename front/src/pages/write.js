@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Main from '../components/main';
 import Seo from '../components/seo';
+import changeToEnglish from '../hooks/change_to_english';
 import changeToKorean from '../hooks/change_to_korean';
 import useInput from '../hooks/use_input';
-import useSelect from '../hooks/use_select';
 import { addPost } from '../redux/actions/post';
 import { loadMyInfo } from '../redux/actions/user';
 import { setPage } from '../redux/reducers/page';
@@ -22,18 +22,18 @@ const Write = () => {
   const { myInfo } = useSelector((state) => state.user);
 
   // 글 작성에 필요한 입력 정보 (title, category, section, content)
-  const [inputTitle, changeTitle] = useInput('');
-  const [inputCategory, setCategory, changeCategory] = useSelect('커뮤니티');
-  const [inputSection, setSection, changeSection] = useSelect('선택');
-  const [inputContent, changeContent] = useInput('');
+  const [inputTitle, changeInputTitle] = useInput('');
+  const [inputCategory, changeInputCategory, setInputCategory] = useInput('커뮤니티');
+  const [inputSection, changeInputSection, setInputSection] = useInput('선택');
+  const [inputContent, changeInputContent] = useInput('');
 
   // category 선택영역
   const categories = ['커뮤니티', '팀원 찾기', '후기/평점', '채용정보'];
   useEffect(() => {
     if (category) {
-      setCategory(changeToKorean(category));
+      setInputCategory(changeToKorean(category));
     } else {
-      setCategory('커뮤니티');
+      setInputCategory('커뮤니티');
     }
   }, []);
 
@@ -73,9 +73,9 @@ const Write = () => {
   // 게시글 작성하기 요청 성공
   useEffect(() => {
     if (addPostDone) {
-      router.replace(`/${changeToKorean(inputCategory)}/${addPostDone.id}`);
+      router.replace(`/${changeToEnglish(inputCategory)}/${addPostDone.id}`);
     }
-  }, [addPostDone]);
+  }, [addPostDone, inputCategory]);
 
   // 게시글 작성하기 요청 실패
   useEffect(() => {
@@ -91,12 +91,12 @@ const Write = () => {
         <form className={styles.container}>
           <div className={styles.title_box}>
             <p>제목</p>
-            <input type='text' name='inputTitle' placeholder='글 제목을 입력해주세요' value={inputTitle} onChange={changeTitle} required />
+            <input type='text' name='inputTitle' placeholder='글 제목을 입력해주세요' value={inputTitle} onChange={changeInputTitle} required />
           </div>
           <div className={styles.classification_box}>
             <p>분류</p>
             <div className={styles.category_box}>
-              <select name='inputCategory' value={inputCategory} onChange={changeCategory}>
+              <select name='inputCategory' value={inputCategory} onChange={changeInputCategory}>
                 {categories.map((category, idx) => {
                   return (<option key={idx} value={category}>{category}</option>);
                 })}
@@ -105,13 +105,13 @@ const Write = () => {
             <div className={styles.section_box}>
               {inputCategory === '커뮤니티' || inputCategory === '팀원 찾기'
                 ?
-                <select name='inputSection' value={inputSection} onChange={changeSection}>
+                <select name='inputSection' value={inputSection} onChange={changeInputSection}>
                   {sections.map((section, idx) => {
                     return (<option key={idx} value={section}>{section}</option>);
                   })}
                 </select>
                 :
-                <select name='inputSection' value={inputSection} onChange={setSection} disabled>
+                <select name='inputSection' value={inputSection} onChange={setInputSection} disabled>
                   {sections.map((section, idx) => {
                     return (<option key={idx} value={section}>{section}</option>);
                   })}
@@ -120,7 +120,7 @@ const Write = () => {
             </div>
           </div>
           <div className={styles.content_box}>
-            <textarea name='inputContent' placeholder='내용을 입력해주세요' value={inputContent} onChange={changeContent} required />
+            <textarea name='inputContent' placeholder='내용을 입력해주세요' value={inputContent} onChange={changeInputContent} required />
           </div>
           <div className={styles.button}>
             <button className={styles.back_button} type='button' onClick={backHandler}>뒤로가기</button>

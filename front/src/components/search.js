@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import changeQuery from '../hooks/change_query';
+import useInput from '../hooks/use_input';
 import searchIcon from '../images/search_icon.png';
 import styles from '../styles/search.module.css';
 
@@ -12,10 +13,7 @@ const Search = () => {
   const { category, section, status, search, page } = useSelector((state) => state.page);
 
   // 검색어
-  const [searchText, setSearchText] = useState(search ? search : '');
-  const changeSearchText = useCallback((event) => {
-    setSearchText(event.target.value);
-  }, [searchText, setSearchText]);
+  const [searchText, changeSearchText, setSearchText] = useInput(search ? search : '');
 
   // 페이지에 따라 검색창에 띄워질 문구
   const setPlaceholder = useCallback(() => {

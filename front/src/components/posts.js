@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 
+import getDisplayTime from '../hooks/get_display_time';
 import grayHeartIcon from '../images/gray_heart.svg';
 import styles from '../styles/posts.module.css';
 import Page from './page';
@@ -23,7 +24,7 @@ const Posts = () => {
                     <div className={styles.info}>
                       <h3 className={styles.title}>{post.post_title}</h3>
                       <p className={styles.content}>{post.post_content}</p>
-                      <div className={styles.sub_info}>{post.post_writer_nickname} · {post.post_created_date}</div>
+                      <div className={styles.sub_info}>{post.post_writer_nickname} · {getDisplayTime(post.post_created_date)}</div>
                     </div>
                     <div className={styles.additional_info}>
                       <div className={styles.comment_info}>
