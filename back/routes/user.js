@@ -3,8 +3,8 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 const db = require('../lib/database');
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const getNow = require('../lib/get_now');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
@@ -82,9 +82,8 @@ router.post('/signup', isNotLoggedIn, (req, res) => {
       if (error) { throw error; }
       bcrypt.hash(req.body.inputPassword, 11, (error, hashedPassword) => {
         if (error) { throw error; }
-        sql = `INSERT INTO private_userdata (user_id, user_password, account_created_date, password_updated_last_date) VALUES (?, ?, ?, ?);`;
-        const now = getNow();
-        db.query(sql, [req.body.inputId, hashedPassword, now, now], (error, InsertionResult) => {
+        sql = `INSERT INTO private_userdata (user_id, user_password, account_created_date, password_updated_last_date) VALUES (?, ?, now(), now());`;
+        db.query(sql, [req.body.inputId, hashedPassword], (error, InsertionResult) => {
           if (error) { throw error; }
           return res.status(200).json({
             log: `signupDone(${getNow()})`,

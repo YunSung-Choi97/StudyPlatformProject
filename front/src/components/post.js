@@ -42,7 +42,7 @@ const Post = () => {
             <h1>{post.post_title}</h1>
             <div className={styles.info}>
               <div>{post.post_writer_nickname}</div>
-              <div>{getDisplayTime(post.post_created_date)}</div>
+              <div>{getDisplayTime(post.post_created_date, 'mm/dd hh:mm')}</div>
               {(isLoggedIn && post.post_writer_id === myInfo.id) &&
                 <div>
                   {deletePostLoading

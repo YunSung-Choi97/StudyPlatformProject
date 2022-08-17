@@ -1,8 +1,8 @@
 const express = require('express');
 
 const db = require('../lib/database');
-const { isLoggedIn } = require('./middlewares');
 const getNow = require('../lib/get_now');
+const { isLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
@@ -110,7 +110,7 @@ router.post('/add-post', isLoggedIn, (req, res) => {
     const sql =
       `INSERT INTO post
         (post_writer_id, post_title, post_category, post_section, post_status, post_created_date, post_content, post_views)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
+        VALUES (?, ?, ?, ?, ?, now(), ?, ?);`;
 
     const values = [req.body.id, req.body.title, req.body.category];
     if (req.body.section !== '선택') {
@@ -123,7 +123,7 @@ router.post('/add-post', isLoggedIn, (req, res) => {
     } else {
       values.push(null);
     }
-    values.push(getNow(), req.body.content, 0);
+    values.push(req.body.content, 0);
 
     db.query(sql, values, (error, InsertionResult) => {
       if (error) { throw error; }
@@ -160,8 +160,8 @@ router.post('/add-comment', isLoggedIn, (req, res) => {
     let sql =
       `INSERT INTO comment
         (post_id, comment_writer_id, comment_created_date, comment_content)
-        VALUES (?, ?, ?, ?);`;
-    const values = [req.body.post_id, req.body.comment_writer_id, getNow(), req.body.comment_content];
+        VALUES (?, ?, now(), ?);`;
+    const values = [req.body.post_id, req.body.comment_writer_id, req.body.comment_content];
 
     db.query(sql, values, (error, InsertionResult) => {
       if (error) { throw error; }

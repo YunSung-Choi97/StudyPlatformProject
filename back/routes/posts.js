@@ -2,6 +2,7 @@ const express = require('express');
 
 const db = require('../lib/database');
 const changeToKorean = require('../lib/change_to_korean');
+const getNow = require('../lib/get_now');
 
 const router = express.Router();
 

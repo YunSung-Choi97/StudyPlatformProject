@@ -1,6 +1,0 @@
-# dependencies
-/node_modules
-
-# database info
-/lib/db.js
-/lib/store_option.js
